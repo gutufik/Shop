@@ -27,11 +27,15 @@
             <ComboBox x:Name="cbUnits" ItemsSource="{Binding Units}" SelectionChanged="cbUnits_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text="{Binding Name}" />
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox x:Name="tbSearch" TextChanged="tbSearch_TextChanged" Margin="10, 0"/>
+            <TextBox x:Name="tbSearch" TextChanged="tbSearch_TextChanged" Margin="10, 0" Width="100"/>
+            <ComboBox x:Name="cbMonthFilter" SelectionChanged="cbMonthFilter_SelectionChanged">
+                <ComboBoxItem>Все</ComboBoxItem>
+                <ComboBoxItem>Текущий месяц</ComboBoxItem>
+            </ComboBox>
         </StackPanel>
 
         <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding ProductsForSearch}" IsReadOnly="True" AutoGenerateColumns="False">
@@ -45,10 +49,15 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Наименование" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="Комментарий" Binding="{Binding Description}"/>
+                <DataGridTemplateColumn Header="Комментарий" Width="200">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Дата добавления" Binding="{Binding AddDate}"/>
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Unit.Name}"/>
-
                 <DataGridTemplateColumn Header="Страны-поставщики">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -64,5 +73,15 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+            <Button Content="&lt;" Width="30" x:Name="btnPreviousPage" Click="btnPreviousPage_Click"/>
+            <Button Content=">" Width="30" x:Name="btnNextPage" Click="btnNextPage_Click"/>
+            <ComboBox x:Name="cbCountPerPage" SelectionChanged="cbCountPerPage_SelectionChanged">
+                <ComboBoxItem>10</ComboBoxItem>
+                <ComboBoxItem>50</ComboBoxItem>
+                <ComboBoxItem>200</ComboBoxItem>
+                <ComboBoxItem>Все</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
     </Grid>
 </Page>

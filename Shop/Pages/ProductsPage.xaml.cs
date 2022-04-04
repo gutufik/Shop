@@ -24,6 +24,8 @@ namespace Shop.Pages
         public ObservableCollection<Unit> Units { get; set; }
         public ObservableCollection<Product> Products { get; set; }
         public List<Product> ProductsForSearch { get; set; }
+        private int startIndex;
+        private int countPerPage;
         public ProductsPage()
         {
             InitializeComponent();
@@ -31,7 +33,15 @@ namespace Shop.Pages
             ProductsForSearch = Products.ToList();
             Units = DataAccess.GetUnits();
             Units.Add(new Unit { Name = "Все"});
+            startIndex = 0;
+            cbCountPerPage.SelectedIndex = 0;
+            countPerPage = Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
+            GoPagination();
             this.DataContext = this;
+        }
+        private void ApplyFilters()
+        { 
+            
         }
 
         private void cbUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -40,7 +50,7 @@ namespace Shop.Pages
             if (unit.Name == "Все")
                 ProductsForSearch = Products.ToList();
             else
-                ProductsForSearch = Products.Where(p => p.UnitId == unit.Id).ToList();
+                ProductsForSearch = ProductsForSearch.Where(p => p.UnitId == unit.Id).ToList();
 
             dgProducts.ItemsSource = ProductsForSearch;
         }
@@ -50,6 +60,56 @@ namespace Shop.Pages
             var text = tbSearch.Text;
             var search = ProductsForSearch.Where(p => p.Name.ToLower().Contains(text.ToLower()) || p.Description.ToLower().Contains(text.ToLower())).ToList();
             dgProducts.ItemsSource = search;
+        }
+
+        private void GoPagination()
+        {
+            int test = (Products.Count / (countPerPage + startIndex)) > 0 ? countPerPage : Products.Count % countPerPage;
+            var search = ProductsForSearch.GetRange(startIndex, test);
+            dgProducts.ItemsSource = ProductsForSearch;
+            this.DataContext = this;
+        }
+
+        private void cbMonthFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selectedFilter = (cbMonthFilter.SelectedItem as ComboBoxItem).Content.ToString();
+            if (selectedFilter == "Все")
+            {
+                dgProducts.ItemsSource = ProductsForSearch;
+            }   
+            else
+            {
+                var search = ProductsForSearch.Where(p => p.AddDate.Month == DateTime.Now.Month ).ToList();
+                dgProducts.ItemsSource = search;
+            }
+        }
+
+        private void btnPreviousPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (startIndex != 0)
+                startIndex -= Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
+            GoPagination();
+        }
+
+        private void btnNextPage_Click(object sender, RoutedEventArgs e)
+        {
+            if (startIndex + Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString()) < Products.Count)
+                startIndex += Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
+            GoPagination();
+        }
+
+        private void cbCountPerPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if ((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString() != "Все")
+            {
+                countPerPage = Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
+            }
+            else 
+            {
+                countPerPage = Products.Count;
+            }
+            startIndex = 0;
+            GoPagination();
         }
     }
 }
