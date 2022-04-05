@@ -92,7 +92,6 @@ namespace Shop.Pages
                 var search = ProductsForSearch.GetRange(startIndex, test);
                 dgProducts.ItemsSource = search;
             }
-
         }
 
         private void cbMonthFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -127,6 +126,17 @@ namespace Shop.Pages
             }
             startIndex = 0;
             GoPagination();
+        }
+
+        private void dgProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnDelete.IsEnabled = dgProducts.SelectedItems.Count != 0;
+            btnEdit.IsEnabled = dgProducts.SelectedItems.Count != 0;
+        }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new ProductPage(dgProducts.SelectedItem as Product));
         }
     }
 }

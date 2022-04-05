@@ -38,7 +38,7 @@
             </ComboBox>
         </StackPanel>
 
-        <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False">
+        <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="dgProducts_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Идентификатор" Binding="{Binding Id}" />
                 <DataGridTemplateColumn Header="Фото">
@@ -82,6 +82,8 @@
                 <ComboBoxItem>200</ComboBoxItem>
                 <ComboBoxItem>Все</ComboBoxItem>
             </ComboBox>
+            <Button x:Name="btnDelete" Content="Удалить" IsEnabled="False"/>
+            <Button x:Name="btnEdit" Content="Изменить" IsEnabled="False" Click="btnEdit_Click"/>
         </StackPanel>
     </Grid>
 </Page>
