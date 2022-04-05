@@ -35,53 +35,70 @@ namespace Shop.Pages
             Units.Add(new Unit { Name = "Все"});
             startIndex = 0;
             cbCountPerPage.SelectedIndex = 0;
+
             countPerPage = Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
-            GoPagination();
+            cbMonthFilter.SelectedIndex = 0;
+
+            cbUnits.SelectedIndex = Units.Count - 1;
+
             this.DataContext = this;
+            GoPagination();
         }
         private void ApplyFilters()
-        { 
-            
+        {
+            if (cbMonthFilter.SelectedItem != null & cbUnits.SelectedItem != null)
+            {
+                var text = tbSearch.Text;
+                var selectedFilter = (cbMonthFilter.SelectedItem as ComboBoxItem).Content.ToString();
+                
+                var unit = cbUnits.SelectedItem as Unit;
+
+                if (unit.Name == "Все")
+                    ProductsForSearch = Products.ToList();
+                else
+                    ProductsForSearch = Products.Where(p => p.UnitId == unit.Id).ToList();
+
+                if (selectedFilter == "Все")
+                {
+                    dgProducts.ItemsSource = ProductsForSearch;
+                }
+                else
+                {
+                    ProductsForSearch = ProductsForSearch.Where(p => p.AddDate.Month == DateTime.Now.Month).ToList();
+                }
+
+                ProductsForSearch = ProductsForSearch.Where(p => p.Name.ToLower().Contains(text.ToLower()) || p.Description.ToLower().Contains(text.ToLower())).ToList();
+                dgProducts.ItemsSource = ProductsForSearch;
+            }
         }
 
         private void cbUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var unit = cbUnits.SelectedItem as Unit;
-            if (unit.Name == "Все")
-                ProductsForSearch = Products.ToList();
-            else
-                ProductsForSearch = ProductsForSearch.Where(p => p.UnitId == unit.Id).ToList();
-
-            dgProducts.ItemsSource = ProductsForSearch;
+            ApplyFilters(); 
+            GoPagination();
         }
 
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var text = tbSearch.Text;
-            var search = ProductsForSearch.Where(p => p.Name.ToLower().Contains(text.ToLower()) || p.Description.ToLower().Contains(text.ToLower())).ToList();
-            dgProducts.ItemsSource = search;
+            ApplyFilters();
+            GoPagination();
         }
 
         private void GoPagination()
         {
-            int test = (Products.Count / (countPerPage + startIndex)) > 0 ? countPerPage : Products.Count % countPerPage;
-            var search = ProductsForSearch.GetRange(startIndex, test);
-            dgProducts.ItemsSource = ProductsForSearch;
-            this.DataContext = this;
+            if (startIndex < ProductsForSearch.Count)
+            {
+                int test = (ProductsForSearch.Count / (countPerPage + startIndex)) > 0 ? countPerPage : ProductsForSearch.Count % countPerPage;
+                var search = ProductsForSearch.GetRange(startIndex, test);
+                dgProducts.ItemsSource = search;
+            }
+
         }
 
         private void cbMonthFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var selectedFilter = (cbMonthFilter.SelectedItem as ComboBoxItem).Content.ToString();
-            if (selectedFilter == "Все")
-            {
-                dgProducts.ItemsSource = ProductsForSearch;
-            }   
-            else
-            {
-                var search = ProductsForSearch.Where(p => p.AddDate.Month == DateTime.Now.Month ).ToList();
-                dgProducts.ItemsSource = search;
-            }
+            ApplyFilters();
+            GoPagination();
         }
 
         private void btnPreviousPage_Click(object sender, RoutedEventArgs e)
