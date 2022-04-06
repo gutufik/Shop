@@ -36,6 +36,20 @@
                 <ComboBoxItem>Все</ComboBoxItem>
                 <ComboBoxItem>Текущий месяц</ComboBoxItem>
             </ComboBox>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Наименование"/>
+                <ComboBox x:Name="cbNameSort">
+                    <ComboBoxItem Content="А-Я"/>
+                    <ComboBoxItem Content="Я-А"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Дата добавления"/>
+                <ComboBox x:Name="cbDateSort">
+                    <ComboBoxItem Content="От старых к новым"/>
+                    <ComboBoxItem Content="От новых к старым"/>
+                </ComboBox>
+            </StackPanel>
         </StackPanel>
 
         <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="dgProducts_SelectionChanged">
