@@ -80,9 +80,55 @@ namespace Core
             return new ObservableCollection<Product>(ShopBozyaEntities.GetContext().Products);
         }
 
+        public static bool SaveProduct(Product product, List<ProductCountry> productCountries)
+        {
+            if (GetProducts().Where(p => p.Id == product.Id).Count() == 0)
+            {
+                product.AddDate = DateTime.Now;
+                ShopBozyaEntities.GetContext().Products.Add(product);
+            }
+            else
+                ShopBozyaEntities.GetContext().Products.SingleOrDefault(p => p.Id == product.Id);
+
+            return Convert.ToBoolean(ShopBozyaEntities.GetContext().SaveChanges());
+        }
+
+        /*
+        public static bool SaveProductCountries(int productId, int countryId)
+        {
+            if (GetProductCountries().Where(p => p.ProductId == productId && p.CountryId == countryId).Count() == 0)
+            {
+                ShopBozyaEntities.GetContext().ProductCountries.Add(new ProductCountry
+                {
+                    ProductId = productId,
+                    CountryId = countryId
+                });
+            }
+            else
+            {
+            }
+            return true;
+        }
+        */
+        public static ObservableCollection<ProductCountry> GetProductCountries()
+        {
+            return new ObservableCollection<ProductCountry>(ShopBozyaEntities.GetContext().ProductCountries);
+        }
+
+        public static bool DeleteProduct(Product product)
+        {
+            ShopBozyaEntities.GetContext().Products.Remove(product);
+            return Convert.ToBoolean(ShopBozyaEntities.GetContext().SaveChanges());
+        }
+
         public static ObservableCollection<Unit> GetUnits()
         {
             return new ObservableCollection<Unit>(ShopBozyaEntities.GetContext().Units);
+        }
+
+        public static ObservableCollection<Country> GetCountries()
+        {
+            return new ObservableCollection<Country>(ShopBozyaEntities.GetContext().Countries);
         }
     }
 }
