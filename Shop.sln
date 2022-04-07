@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop", "Shop\Shop.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{6C1AA1BD-E9B7-4269-BC07-3C9E8C31233D}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Maket", "Maket\Maket.vbproj", "{9DE1376E-B006-4358-B4C6-692DEB3F2F9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6C1AA1BD-E9B7-4269-BC07-3C9E8C31233D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C1AA1BD-E9B7-4269-BC07-3C9E8C31233D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C1AA1BD-E9B7-4269-BC07-3C9E8C31233D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE1376E-B006-4358-B4C6-692DEB3F2F9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE1376E-B006-4358-B4C6-692DEB3F2F9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE1376E-B006-4358-B4C6-692DEB3F2F9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE1376E-B006-4358-B4C6-692DEB3F2F9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

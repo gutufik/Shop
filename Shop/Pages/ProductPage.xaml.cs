@@ -26,6 +26,7 @@ namespace Shop.Pages
         public Product Product { get; set; }
         public List<Country> ProductCountries { get; set; }
         public List<Country> Countries { get; set; }
+        public List<Unit> Units { get; set; }
 
         public ProductPage(Product product)
         {
