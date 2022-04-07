@@ -24,6 +24,8 @@ namespace Shop.Pages
         public ObservableCollection<Unit> Units { get; set; }
         public ObservableCollection<Product> Products { get; set; }
         public List<Product> ProductsForSearch { get; set; }
+        private Dictionary<string, Func<Product, object>> Sortings;
+
         private int startIndex;
         private int countPerPage;
         public ProductsPage()
@@ -32,21 +34,30 @@ namespace Shop.Pages
             Products = DataAccess.GetProducts();
             ProductsForSearch = Products.ToList();
             Units = DataAccess.GetUnits();
+
+            Sortings = new Dictionary<string, Func<Product, object>>
+            {
+                { "Сначала старые", x => x.AddDate },//reverse
+                { "Сначала новые", x => x.AddDate },
+                { "А-Я", x => x.Name },
+                { "Я-А", x => x.Name } //reverse
+            };
+
             Units.Add(new Unit { Name = "Все"});
             startIndex = 0;
             cbCountPerPage.SelectedIndex = 0;
+            
 
             countPerPage = Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
             cbMonthFilter.SelectedIndex = 0;
 
             cbUnits.SelectedIndex = Units.Count - 1;
-
+            cbSort.SelectedIndex = 0;
             this.DataContext = this;
-            GoPagination();
         }
         private void ApplyFilters()
         {
-            if (cbMonthFilter.SelectedItem != null & cbUnits.SelectedItem != null)
+            if (cbMonthFilter.SelectedItem != null & cbUnits.SelectedItem != null & cbSort.SelectedItem != null)
             {
                 var text = tbSearch.Text;
                 var selectedFilter = (cbMonthFilter.SelectedItem as ComboBoxItem).Content.ToString();
@@ -66,8 +77,15 @@ namespace Shop.Pages
                 {
                     ProductsForSearch = ProductsForSearch.Where(p => p.AddDate.Month == DateTime.Now.Month).ToList();
                 }
+                
+                var sort = (cbSort.SelectedItem as ComboBoxItem).Content.ToString();
+                
 
                 ProductsForSearch = ProductsForSearch.Where(p => p.Name.ToLower().Contains(text.ToLower()) || p.Description.ToLower().Contains(text.ToLower())).ToList();
+                ProductsForSearch = ProductsForSearch.OrderBy(Sortings[sort]).ToList();
+                if (sort == "Я-А" || sort == "Сначала новые")
+                    ProductsForSearch.Reverse();
+                
                 dgProducts.ItemsSource = ProductsForSearch;
             }
         }
@@ -92,6 +110,7 @@ namespace Shop.Pages
                 var search = ProductsForSearch.GetRange(startIndex, test);
                 dgProducts.ItemsSource = search;
             }
+            lblWithdraw.Content = $"{dgProducts.ItemsSource.Cast<Product>().ToList().Count} из {Products.Count}";
         }
 
         private void cbMonthFilter_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -139,26 +158,14 @@ namespace Shop.Pages
             NavigationService.Navigate(new ProductPage(dgProducts.SelectedItem as Product));
         }
 
-        private void cbDateSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFilters();
             GoPagination();
             var currentItems = dgProducts.ItemsSource.Cast<Product>().ToList();
-
-            currentItems = currentItems.OrderBy(product => product.AddDate).ToList();
-            if ((cbDateSort.SelectedItem as ComboBoxItem).Content.ToString() == "Сначала старые")
-                currentItems.Reverse();
-            dgProducts.ItemsSource = currentItems;
-        }
-
-        private void cbNameSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ApplyFilters();
-            GoPagination();
-            var currentItems = dgProducts.ItemsSource.Cast<Product>().ToList();
-
-            currentItems = currentItems.OrderBy(product => product.Name).ToList();
-            if ((cbNameSort.SelectedItem as ComboBoxItem).Content.ToString() == "Я-А")
+            var sort = (cbSort.SelectedItem as ComboBoxItem).Content.ToString();
+            currentItems = currentItems.OrderBy(Sortings[sort]).ToList();
+            if (sort == "Я-А" || sort == "Сначала новые")
                 currentItems.Reverse();
             dgProducts.ItemsSource = currentItems;
         }

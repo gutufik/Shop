@@ -37,15 +37,10 @@
                 <ComboBoxItem>Текущий месяц</ComboBoxItem>
             </ComboBox>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Наименование"/>
-                <ComboBox x:Name="cbNameSort" SelectionChanged="cbNameSort_SelectionChanged">
+                <TextBlock Text="Сортировка"/>
+                <ComboBox x:Name="cbSort" SelectionChanged="cbSort_SelectionChanged">
                     <ComboBoxItem Content="А-Я"/>
                     <ComboBoxItem Content="Я-А"/>
-                </ComboBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Дата добавления"/>
-                <ComboBox x:Name="cbDateSort" SelectionChanged="cbDateSort_SelectionChanged">
                     <ComboBoxItem Content="Сначала старые"/>
                     <ComboBoxItem Content="Сначала новые"/>
                 </ComboBox>
@@ -98,6 +93,7 @@
             </ComboBox>
             <Button x:Name="btnDelete" Content="Удалить" IsEnabled="False"/>
             <Button x:Name="btnEdit" Content="Изменить" IsEnabled="False" Click="btnEdit_Click"/>
+            <Label x:Name="lblWithdraw"/>
         </StackPanel>
     </Grid>
 </Page>
