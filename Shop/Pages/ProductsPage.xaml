@@ -38,16 +38,16 @@
             </ComboBox>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Наименование"/>
-                <ComboBox x:Name="cbNameSort">
+                <ComboBox x:Name="cbNameSort" SelectionChanged="cbNameSort_SelectionChanged">
                     <ComboBoxItem Content="А-Я"/>
                     <ComboBoxItem Content="Я-А"/>
                 </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Дата добавления"/>
-                <ComboBox x:Name="cbDateSort">
-                    <ComboBoxItem Content="От старых к новым"/>
-                    <ComboBoxItem Content="От новых к старым"/>
+                <ComboBox x:Name="cbDateSort" SelectionChanged="cbDateSort_SelectionChanged">
+                    <ComboBoxItem Content="Сначала старые"/>
+                    <ComboBoxItem Content="Сначала новые"/>
                 </ComboBox>
             </StackPanel>
         </StackPanel>

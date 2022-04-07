@@ -138,5 +138,29 @@ namespace Shop.Pages
         {
             NavigationService.Navigate(new ProductPage(dgProducts.SelectedItem as Product));
         }
+
+        private void cbDateSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
+            GoPagination();
+            var currentItems = dgProducts.ItemsSource.Cast<Product>().ToList();
+
+            currentItems = currentItems.OrderBy(product => product.AddDate).ToList();
+            if ((cbDateSort.SelectedItem as ComboBoxItem).Content.ToString() == "Сначала старые")
+                currentItems.Reverse();
+            dgProducts.ItemsSource = currentItems;
+        }
+
+        private void cbNameSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilters();
+            GoPagination();
+            var currentItems = dgProducts.ItemsSource.Cast<Product>().ToList();
+
+            currentItems = currentItems.OrderBy(product => product.Name).ToList();
+            if ((cbNameSort.SelectedItem as ComboBoxItem).Content.ToString() == "Я-А")
+                currentItems.Reverse();
+            dgProducts.ItemsSource = currentItems;
+        }
     }
 }
