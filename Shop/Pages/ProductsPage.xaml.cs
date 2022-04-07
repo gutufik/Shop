@@ -161,13 +161,14 @@ namespace Shop.Pages
         private void cbSort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFilters();
-            GoPagination();
-            var currentItems = dgProducts.ItemsSource.Cast<Product>().ToList();
+            
+
             var sort = (cbSort.SelectedItem as ComboBoxItem).Content.ToString();
-            currentItems = currentItems.OrderBy(Sortings[sort]).ToList();
+            ProductsForSearch = ProductsForSearch.OrderBy(Sortings[sort]).ToList();
             if (sort == "Я-А" || sort == "Сначала новые")
-                currentItems.Reverse();
-            dgProducts.ItemsSource = currentItems;
+                ProductsForSearch.Reverse();
+            dgProducts.ItemsSource = ProductsForSearch;
+            GoPagination();
         }
     }
 }
