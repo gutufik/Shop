@@ -113,8 +113,10 @@
         </StackPanel>
         <Button Content="Save Data" Grid.Row="2" Grid.Column="4" Template="{DynamicResource ButtonBaseControlTemplate1}" HorizontalAlignment="Right"/>
         <Button Content="Close" Grid.Row="2" Grid.Column="5" Template="{DynamicResource ButtonBaseControlTemplate1}" HorizontalAlignment="Left"/>
-
+        
+        
         <TextBlock Text="Birthday:" Grid.Column="3" Grid.Row="3"/>
+        <TextBlock Text="Phone numers" Grid.Column="0" Grid.Row="6" Foreground="Black" FontWeight="Bold"/>
         <Calendar Grid.Row="3" Grid.Column="4" Grid.RowSpan="4" FirstDayOfWeek="Monday">
             <Calendar.BlackoutDates>
                 <CalendarDateRange Start="10/5/2013" End="10/8/2013"></CalendarDateRange>
