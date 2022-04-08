@@ -45,6 +45,7 @@
                     <ComboBoxItem Content="Сначала новые"/>
                 </ComboBox>
             </StackPanel>
+            <Button Content="Invoices" Click="Button_Click"/>
         </StackPanel>
 
         <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="dgProducts_SelectionChanged">

@@ -130,5 +130,14 @@ namespace Core
         {
             return new ObservableCollection<Country>(ShopBozyaEntities.GetContext().Countries);
         }
+        public static ObservableCollection<ProductIntake> GetIntakes()
+        {
+            return new ObservableCollection<ProductIntake>(ShopBozyaEntities.GetContext().ProductIntakes);
+        }
+        public static ObservableCollection<Supplier> GetSuppliers()
+        {
+            return new ObservableCollection<Supplier>(ShopBozyaEntities.GetContext().Suppliers);
+        }
+
     }
 }

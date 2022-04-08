@@ -50,17 +50,5 @@ namespace Shop.Pages
             else
                 MessageBox.Show("Неверный логин или пароль", "Ошибка");
         }
-
-        private void btnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-                NavigationService.GoBack();
-        }
-
-        private void btnGoForward_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoForward)
-                NavigationService.GoForward();
-        }
     }
 }

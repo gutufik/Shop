@@ -25,5 +25,17 @@ namespace Shop.Windows
             InitializeComponent();
             frame.NavigationService.Navigate(new Pages.AuthorizationPage());
         }
+
+        private void btnGoBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (frame.NavigationService.CanGoBack)
+                frame.NavigationService.GoBack();
+        }
+
+        private void btnGoForward_Click(object sender, RoutedEventArgs e)
+        {
+            if (frame.NavigationService.CanGoForward)
+                frame.NavigationService.GoForward();
+        }
     }
 }

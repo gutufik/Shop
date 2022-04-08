@@ -170,5 +170,10 @@ namespace Shop.Pages
             dgProducts.ItemsSource = ProductsForSearch;
             GoPagination();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.IntakesPage());
+        }
     }
 }

@@ -32,10 +32,14 @@ namespace Shop.Pages
         {
             InitializeComponent();
             Product = product;
+            Units = DataAccess.GetUnits().ToList();
             Countries = DataAccess.GetCountries().ToList();
             FillCountries();
             cbCounties.ItemsSource = Countries;
             lvCountries.ItemsSource = ProductCountries;
+            cbUnits.ItemsSource = Units;
+            cbUnits.SelectedItem = product.Unit;
+
 
             this.DataContext = Product;
         }
@@ -56,6 +60,7 @@ namespace Shop.Pages
             Product.UnitId = (cbUnits.SelectedItem as Unit).Id;
             Product.Description = tbDescription.Text;
             //DataAccess.SaveProduct(Product);
+
         }
 
         private void btnChoicePhoto_Click(object sender, RoutedEventArgs e)
