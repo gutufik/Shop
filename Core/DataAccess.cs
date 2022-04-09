@@ -25,7 +25,7 @@ namespace Core
             return GetUsers().Where(user => user.Login == login && user.Password == password).FirstOrDefault();
         }
 
-        public static bool TryLogin(string login, string password)
+        public static bool IsUserCorrect(string login, string password)
         {
             return GetUser(login, password) != null;
         }
