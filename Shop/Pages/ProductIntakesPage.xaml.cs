@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Core;
+using Shop;
 
 namespace Shop.Pages
 {
@@ -22,15 +23,40 @@ namespace Shop.Pages
     public partial class IntakeProductsPage : Page
     {
         public List<ProductIntake> Intakes { get; set; }
+        public List<Product> Products { get; set; }
         public List<Supplier> Suppliers { get; set; }
-        public List<ProductIntakeProduct> IntakeProducts { get; set; }
+        public List<IntakeProduct> IntakeProducts { get; set; }
 
 
         public IntakeProductsPage()
         {
-            Suppliers = DataAccess.GetSuppliers().ToList();
-            DataContext = this;
             InitializeComponent();
+            Products = DataAccess.GetProducts().ToList();
+            IntakeProducts = new List<IntakeProduct> { new IntakeProduct {cbProduct = new ComboBox() } };
+            gridProducts.ItemsSource = IntakeProducts;
+
+            Suppliers = DataAccess.GetSuppliers().ToList();
+            cbColumn.ItemsSource = Products;
+            DataContext = this;
+        }
+
+        private void gridProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var t = (sender as Product);
+        }
+
+        private void gridProducts_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+        {
+            var t = (gridProducts.ItemsSource as List<IntakeProduct>);
+
+
+            //CollectionViewSource.GetDefaultView(gridProducts.ItemsSource).Refresh();
+        }
+
+        private void gridProducts_CurrentCellChanged(object sender, EventArgs e)
+        {
+            var t = (sender as DataGridComboBoxColumn);
+            //gridProducts.Items.Refresh();
         }
     }
 }

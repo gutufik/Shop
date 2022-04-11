@@ -33,12 +33,14 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4">
+        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserAddRows="True" CanUserDeleteRows="True" Height="500" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
+                  CurrentCellChanged="gridProducts_CurrentCellChanged" CanUserSortColumns="False" CellEditEnding="gridProducts_CellEditEnding" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Товар"/>
-                <DataGridTextColumn Header="Цена"/>
-                <DataGridTextColumn Header="Количество"/>
-                <DataGridTextColumn Header="Сумма"/>
+                <DataGridComboBoxColumn x:Name="cbColumn" Header="Товар" DisplayMemberPath="Name"
+                                        SelectedItemBinding="{Binding SelectedItem}"/>
+                <DataGridTextColumn x:Name="clPrice" Header="Цена" Binding="{Binding PriceUnit, Mode=TwoWay}" />
+                <DataGridTextColumn x:Name="clCount" Header="Количество" Binding="{Binding Count}"/>
+                <DataGridTextColumn Header="Сумма" x:Name="clSumm" Binding="{Binding Summ}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         
