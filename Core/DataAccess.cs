@@ -12,7 +12,7 @@ namespace Core
     {
         public static ObservableCollection<User> GetUsers()
         {
-            return new ObservableCollection<User>(ShopBozyaEntities.GetContext().Users);
+            return new ObservableCollection<User>(ShopMyasnikovEntities.GetContext().Users);
         }
 
         public static User GetUser(int id)
@@ -39,8 +39,8 @@ namespace Core
                 RoleId = GetRole("Клиент").Id
             };
 
-            ShopBozyaEntities.GetContext().Users.Add(user);
-            return Convert.ToBoolean(ShopBozyaEntities.GetContext().SaveChanges());
+            ShopMyasnikovEntities.GetContext().Users.Add(user);
+            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
         }
 
 
@@ -61,7 +61,7 @@ namespace Core
 
         public static ObservableCollection<Role> GetRoles()
         {
-            return new ObservableCollection<Role>(ShopBozyaEntities.GetContext().Roles);
+            return new ObservableCollection<Role>(ShopMyasnikovEntities.GetContext().Roles);
         }
 
         public static Role GetRole(int id)
@@ -77,7 +77,7 @@ namespace Core
 
         public static ObservableCollection<Product> GetProducts()
         {
-            return new ObservableCollection<Product>(ShopBozyaEntities.GetContext().Products);
+            return new ObservableCollection<Product>(ShopMyasnikovEntities.GetContext().Products);
         }
 
         public static bool SaveProduct(Product product, List<ProductCountry> productCountries)
@@ -85,58 +85,103 @@ namespace Core
             if (GetProducts().Where(p => p.Id == product.Id).Count() == 0)
             {
                 product.AddDate = DateTime.Now;
-                ShopBozyaEntities.GetContext().Products.Add(product);
+                ShopMyasnikovEntities.GetContext().Products.Add(product);
             }
             else
-                ShopBozyaEntities.GetContext().Products.SingleOrDefault(p => p.Id == product.Id);
+                ShopMyasnikovEntities.GetContext().Products.SingleOrDefault(p => p.Id == product.Id);
 
-            return Convert.ToBoolean(ShopBozyaEntities.GetContext().SaveChanges());
+            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
+        }
+        public static bool SaveProductIntake(ProductIntake productIntake)
+        {
+            if (GetIntakes().Where(i => i.Id == productIntake.Id).Count() == 0)
+            {
+                ShopMyasnikovEntities.GetContext().ProductIntakes.Add(productIntake);
+            }
+            else
+                ShopMyasnikovEntities.GetContext().ProductIntakes.SingleOrDefault(i => i.Id == productIntake.Id);
+
+            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
+        }
+        public static bool SaveProductIntakeProducts(int productIntakeId, List<ProductIntakeProduct> products)
+        {
+            foreach (var product in products)
+            {
+                product.ProductIntakeId = productIntakeId;
+
+                if (GetProductIntakeroducts().Where(p => p.ProductIntakeId == productIntakeId).Count() == 0)
+                {
+                    ShopMyasnikovEntities.GetContext().ProductIntakeProducts.Add(product);
+                }
+            }
+
+            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
+        }
+        public static ObservableCollection<ProductIntakeProduct> GetProductIntakeroducts()
+        {
+            return new ObservableCollection<ProductIntakeProduct>(ShopMyasnikovEntities.GetContext().ProductIntakeProducts);
         }
 
         /*
-        public static bool SaveProductCountries(int productId, int countryId)
+
+        public static bool SaveProductCountries(int productId, List<Country> countries)
         {
-            if (GetProductCountries().Where(p => p.ProductId == productId && p.CountryId == countryId).Count() == 0)
+            foreach (var country in countries)
             {
-                ShopBozyaEntities.GetContext().ProductCountries.Add(new ProductCountry
+                ProductCountry productCountry = new ProductCountry
                 {
                     ProductId = productId,
-                    CountryId = countryId
-                });
+                    CountryId = country.Id
+                };
+
+                if (GetProductCountries().Where(p => p.ProductId == productId && p.CountryId == country.Id).Count() == 0)
+                {
+                    ShopMyasnikovEntities.GetContext().ProductCountries.Add(productCountry);
+                }
+            }
+            
+            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
+        }
+        public static bool SaveProduct(Product product)
+        {
+            if (GetProducts().Where(p => p.Id == product.Id).Count() == 0)
+            {
+                product.AddDate = DateTime.Now;
+                ShopMyasnikovEntities.GetContext().Products.Add(product);
             }
             else
-            {
-            }
-            return true;
+                ShopMyasnikovEntities.GetContext().Products.SingleOrDefault(p => p.Id == product.Id);
+
+            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
         }
         */
         public static ObservableCollection<ProductCountry> GetProductCountries()
         {
-            return new ObservableCollection<ProductCountry>(ShopBozyaEntities.GetContext().ProductCountries);
+            return new ObservableCollection<ProductCountry>(ShopMyasnikovEntities.GetContext().ProductCountries);
         }
 
         public static bool DeleteProduct(Product product)
         {
-            ShopBozyaEntities.GetContext().Products.Remove(product);
-            return Convert.ToBoolean(ShopBozyaEntities.GetContext().SaveChanges());
+            ShopMyasnikovEntities.GetContext().Products.Remove(product);
+            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
         }
 
         public static ObservableCollection<Unit> GetUnits()
         {
-            return new ObservableCollection<Unit>(ShopBozyaEntities.GetContext().Units);
+            return new ObservableCollection<Unit>(ShopMyasnikovEntities.GetContext().Units);
         }
 
         public static ObservableCollection<Country> GetCountries()
         {
-            return new ObservableCollection<Country>(ShopBozyaEntities.GetContext().Countries);
+            return new ObservableCollection<Country>(ShopMyasnikovEntities.GetContext().Countries);
         }
         public static ObservableCollection<ProductIntake> GetIntakes()
         {
-            return new ObservableCollection<ProductIntake>(ShopBozyaEntities.GetContext().ProductIntakes);
+            return new ObservableCollection<ProductIntake>(ShopMyasnikovEntities.GetContext().ProductIntakes);
         }
         public static ObservableCollection<Supplier> GetSuppliers()
         {
-            return new ObservableCollection<Supplier>(ShopBozyaEntities.GetContext().Suppliers);
+            return new ObservableCollection<Supplier>(ShopMyasnikovEntities.GetContext().Suppliers);
         }
 
     }

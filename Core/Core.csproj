@@ -82,6 +82,7 @@
     <Compile Include="Role.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ShopBozyaEntities.cs" />
     <Compile Include="ShopModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

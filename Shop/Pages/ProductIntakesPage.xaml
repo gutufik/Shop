@@ -20,9 +20,11 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition Height="7*"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
+        <Button x:Name="btnConduct" Content="Провести" Click="btnConduct_Click"/>
         <TextBlock Text="Дата" Grid.Row="1"/>
-        <DatePicker x:Name="dpDate" Grid.Row="1" Grid.Column="1" />
+        <DatePicker x:Name="dpDate" Grid.Row="1" Grid.Column="1" FontSize="20"/>
         <TextBlock Text="Поставщик" Grid.Row="2"/>
 
         <ComboBox x:Name="cbSupplier" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Suppliers}" >
@@ -33,14 +35,12 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2">
-            <TextBlock Text="Sum" />
-            <TextBox x:Name="tbSum" Width="100" IsReadOnly="True"/>
-            <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
+            
+            <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click"/>
         </StackPanel>
         <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" Height="500" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
                   ItemsSource="{Binding IntakeProducts, Mode=TwoWay}" CanUserSortColumns="False"
                   CanUserAddRows="False"
-                  CurrentCellChanged="gridProducts_CurrentCellChanged" CellEditEnding="gridProducts_CellEditEnding" 
                   RowEditEnding="gridProducts_RowEditEnding">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn x:Name="cbColumn" Header="Товар" DisplayMemberPath="Name"
@@ -49,23 +49,26 @@
 
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
-                            <Setter Property="SelectedIndex" Value="{Binding Product,  UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="SelectedIndex" Value="{Binding Product.Id,  UpdateSourceTrigger=PropertyChanged}" />
                             <Setter Property="ItemsSource" Value="{Binding Products, RelativeSource= {RelativeSource FindAncestor,AncestorType=UserControl}, Mode=OneWay}"/>
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                     <DataGridComboBoxColumn.EditingElementStyle>
                         <Style TargetType="ComboBox">
-                            <Setter Property="SelectedIndex" Value="{Binding Product, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="SelectedIndex" Value="{Binding Product.Id, UpdateSourceTrigger=PropertyChanged}" />
                             <Setter Property="ItemsSource" Value="{Binding Products, RelativeSource={RelativeSource FindAncestor,AncestorType=UserControl}, Mode=OneWay}"/>
                         </Style>
                     </DataGridComboBoxColumn.EditingElementStyle>
                 </DataGridComboBoxColumn>
                 <DataGridTextColumn x:Name="clPrice" Header="Цена" Binding="{Binding PriceUnit, Mode=TwoWay}" />
                 <DataGridTextColumn x:Name="clCount" Header="Количество" Binding="{Binding Count}"/>
-                <DataGridTextColumn x:Name="clSum" Header="Sum" Binding="{Binding Sum}"/>
+                <DataGridTextColumn x:Name="clSum" Header="Сумма" Binding="{Binding Sum, Mode=OneWay}"/>
             </DataGrid.Columns>
         </DataGrid>
-        
+        <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">
+            <TextBlock Text="Сумма" />
+            <TextBox x:Name="tbSum" Width="100" IsEnabled="False" Text="0"/>
+        </StackPanel>
         
     </Grid>
 </Page>

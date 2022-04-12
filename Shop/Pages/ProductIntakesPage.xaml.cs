@@ -33,10 +33,13 @@ namespace Shop.Pages
             InitializeComponent();
             Products = DataAccess.GetProducts().ToList();
             IntakeProducts = new List<IntakeProduct>() { new IntakeProduct {cbProduct = new ComboBox(), Count= 0, PriceUnit = 0 } };
+            dpDate.SelectedDate = DateTime.Now;
+            
             //gridProducts.ItemsSource = IntakeProducts;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
 
             Suppliers = DataAccess.GetSuppliers().ToList();
+            cbSupplier.SelectedIndex = 0;
             cbColumn.ItemsSource = Products;
             
             //cbColumn.DataPropertyName = "Table_ID";
@@ -46,38 +49,6 @@ namespace Shop.Pages
         private void gridProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var t = (sender as Product);
-        }
-
-        private void gridProducts_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            //var t = (gridProducts.ItemsSource as List<IntakeProduct>);
-
-
-
-
-
-            //tbSumm.Text =
-            //decimal sum = 0;
-            //for (int i = 0; i < gridProducts.Items.Count; i++) //taking care of each Row  
-            //    {
-            //    DataGridRow row = (DataGridRow)gridProducts.ItemContainerGenerator.ContainerFromIndex(i);
-            //    //var t = (IntakeProduct)row.BindingGroup.Items[0];
-            //    //rowcount += 1;
-            //    //sum += intake.PriceUnit * intake.Count;
-            //}
-
-            //tbSumm.Text = sum.ToString();
-            //gridProducts.Dispatcher.BeginInvoke(new Action(() => gridProducts.Items.Refresh()), System.Windows.Threading.DispatcherPriority.Background);
-            
-
-            //CollectionViewSource.GetDefaultView(gridProducts.ItemsSource).Refresh();
-        }
-
-        private void gridProducts_CurrentCellChanged(object sender, EventArgs e)
-        {
-            var t = (sender as DataGridComboBoxColumn);
-            //foreach ()
-            //gridProducts.Items.Refresh();
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -92,6 +63,7 @@ namespace Shop.Pages
             if (this.gridProducts.SelectedItem != null)
             {
                 (sender as DataGrid).RowEditEnding -= gridProducts_RowEditEnding;
+                //(gridProducts.SelectedItem as IntakeProduct).ProductId = (gridProducts.SelectedItem as IntakeProduct).Product.Id;
                 (sender as DataGrid).CommitEdit();
                 (sender as DataGrid).Items.Refresh();
 
@@ -120,6 +92,27 @@ namespace Shop.Pages
 
             }
             catch { }
+        }
+
+        private void btnConduct_Click(object sender, RoutedEventArgs e)
+        {
+            ProductIntake intake = new ProductIntake {
+                SupplierId = (cbSupplier.SelectedItem as Supplier).Id,
+                TotalAmount = decimal.Parse(tbSum.Text),
+                Data = (DateTime)dpDate.SelectedDate,
+                StatucIntakeId = 2,
+                IsDeleted = false
+            };
+
+            foreach (IntakeProduct product in IntakeProducts)
+            {
+                product.ProductId = product.Product.Id;
+            }
+
+            var products = gridProducts.ItemsSource.Cast<ProductIntakeProduct>().ToList();
+
+            DataAccess.SaveProductIntake(intake);
+            DataAccess.SaveProductIntakeProducts(intake.Id, products);
         }
     }
 }
