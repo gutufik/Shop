@@ -33,17 +33,36 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <StackPanel Orientation="Horizontal" Grid.Column="2" Grid.Row="2">
-            <TextBlock Text="Summ" />
-            <TextBox x:Name="tbSumm" Width="100" IsReadOnly="True"/>
+            <TextBlock Text="Sum" />
+            <TextBox x:Name="tbSum" Width="100" IsReadOnly="True"/>
+            <Button x:Name="btnAdd" Content="Add" Click="btnAdd_Click"/>
         </StackPanel>
-        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserAddRows="True" CanUserDeleteRows="True" Height="500" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
+        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" Height="500" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
                   ItemsSource="{Binding IntakeProducts, Mode=TwoWay}" CanUserSortColumns="False"
-                  CurrentCellChanged="gridProducts_CurrentCellChanged" CellEditEnding="gridProducts_CellEditEnding" >
+                  CanUserAddRows="False"
+                  CurrentCellChanged="gridProducts_CurrentCellChanged" CellEditEnding="gridProducts_CellEditEnding" 
+                  RowEditEnding="gridProducts_RowEditEnding">
             <DataGrid.Columns>
                 <DataGridComboBoxColumn x:Name="cbColumn" Header="Товар" DisplayMemberPath="Name"
-                                        SelectedItemBinding="{Binding SelectedItem}"/>
+                                        ItemsSource="{Binding Path=Products}"
+                                        SelectedValueBinding="{Binding Product, Mode=TwoWay}">
+
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="SelectedIndex" Value="{Binding Product,  UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="ItemsSource" Value="{Binding Products, RelativeSource= {RelativeSource FindAncestor,AncestorType=UserControl}, Mode=OneWay}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                    <DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="SelectedIndex" Value="{Binding Product, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="ItemsSource" Value="{Binding Products, RelativeSource={RelativeSource FindAncestor,AncestorType=UserControl}, Mode=OneWay}"/>
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>
+                </DataGridComboBoxColumn>
                 <DataGridTextColumn x:Name="clPrice" Header="Цена" Binding="{Binding PriceUnit, Mode=TwoWay}" />
                 <DataGridTextColumn x:Name="clCount" Header="Количество" Binding="{Binding Count}"/>
+                <DataGridTextColumn x:Name="clSum" Header="Sum" Binding="{Binding Sum}"/>
             </DataGrid.Columns>
         </DataGrid>
         

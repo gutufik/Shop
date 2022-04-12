@@ -32,12 +32,14 @@ namespace Shop.Pages
         {
             InitializeComponent();
             Products = DataAccess.GetProducts().ToList();
-            IntakeProducts = new List<IntakeProduct> { new IntakeProduct {cbProduct = new ComboBox() } };
+            IntakeProducts = new List<IntakeProduct>() { new IntakeProduct {cbProduct = new ComboBox(), Count= 0, PriceUnit = 0 } };
             //gridProducts.ItemsSource = IntakeProducts;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
 
             Suppliers = DataAccess.GetSuppliers().ToList();
             cbColumn.ItemsSource = Products;
+            
+            //cbColumn.DataPropertyName = "Table_ID";
             DataContext = this;
         }
 
@@ -48,19 +50,25 @@ namespace Shop.Pages
 
         private void gridProducts_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            var t = (gridProducts.ItemsSource as List<IntakeProduct>);
+            //var t = (gridProducts.ItemsSource as List<IntakeProduct>);
+
+
+
+
 
             //tbSumm.Text =
-            decimal sum = 0;
-            for (int i = 0; i < gridProducts.Items.Count; i++) //taking care of each Row  
-            {
-                DataGridRow row = (DataGridRow)gridProducts.ItemContainerGenerator.ContainerFromIndex(i)
-                //rowcount += 1;
-                //sum += intake.PriceUnit * intake.Count;
-            }
+            //decimal sum = 0;
+            //for (int i = 0; i < gridProducts.Items.Count; i++) //taking care of each Row  
+            //    {
+            //    DataGridRow row = (DataGridRow)gridProducts.ItemContainerGenerator.ContainerFromIndex(i);
+            //    //var t = (IntakeProduct)row.BindingGroup.Items[0];
+            //    //rowcount += 1;
+            //    //sum += intake.PriceUnit * intake.Count;
+            //}
 
-            tbSumm.Text = sum.ToString();
+            //tbSumm.Text = sum.ToString();
             //gridProducts.Dispatcher.BeginInvoke(new Action(() => gridProducts.Items.Refresh()), System.Windows.Threading.DispatcherPriority.Background);
+            
 
             //CollectionViewSource.GetDefaultView(gridProducts.ItemsSource).Refresh();
         }
@@ -72,5 +80,46 @@ namespace Shop.Pages
             //gridProducts.Items.Refresh();
         }
 
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            IntakeProducts.Add(new IntakeProduct());
+            gridProducts.Items.Refresh();
+        }
+
+
+        private void gridProducts_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            if (this.gridProducts.SelectedItem != null)
+            {
+                (sender as DataGrid).RowEditEnding -= gridProducts_RowEditEnding;
+                (sender as DataGrid).CommitEdit();
+                (sender as DataGrid).Items.Refresh();
+
+                decimal sum = 0;
+                foreach (IntakeProduct product in gridProducts.ItemsSource)
+                {
+                    sum += product.Sum;
+                }
+                tbSum.Text = sum.ToString();
+                (sender as DataGrid).RowEditEnding += gridProducts_RowEditEnding;
+            }
+
+            //ComboBox ele = gridProducts.Columns[0].GetCellContent(gridProducts.Items[0]) as ComboBox;
+            
+            return;
+        }
+        private void SomeSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var comboBox = sender as ComboBox;
+
+            ComboBox ele = gridProducts.Columns[2].GetCellContent(gridProducts.Items[0]) as ComboBox;
+            try
+            {
+                var selectedItem = ele.Text;
+                MessageBox.Show(selectedItem.ToString());
+
+            }
+            catch { }
+        }
     }
 }
