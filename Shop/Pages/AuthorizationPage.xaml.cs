@@ -103,5 +103,10 @@ namespace Shop.Pages
             }
             return result;
         }
+
+        private void btnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage());
+        }
     }
 }

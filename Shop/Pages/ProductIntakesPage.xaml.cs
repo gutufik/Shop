@@ -33,7 +33,8 @@ namespace Shop.Pages
             InitializeComponent();
             Products = DataAccess.GetProducts().ToList();
             IntakeProducts = new List<IntakeProduct> { new IntakeProduct {cbProduct = new ComboBox() } };
-            gridProducts.ItemsSource = IntakeProducts;
+            //gridProducts.ItemsSource = IntakeProducts;
+            gridProducts.SelectionMode = DataGridSelectionMode.Extended;
 
             Suppliers = DataAccess.GetSuppliers().ToList();
             cbColumn.ItemsSource = Products;
@@ -49,6 +50,17 @@ namespace Shop.Pages
         {
             var t = (gridProducts.ItemsSource as List<IntakeProduct>);
 
+            //tbSumm.Text =
+            decimal sum = 0;
+            for (int i = 0; i < gridProducts.Items.Count; i++) //taking care of each Row  
+            {
+                DataGridRow row = (DataGridRow)gridProducts.ItemContainerGenerator.ContainerFromIndex(i)
+                //rowcount += 1;
+                //sum += intake.PriceUnit * intake.Count;
+            }
+
+            tbSumm.Text = sum.ToString();
+            //gridProducts.Dispatcher.BeginInvoke(new Action(() => gridProducts.Items.Refresh()), System.Windows.Threading.DispatcherPriority.Background);
 
             //CollectionViewSource.GetDefaultView(gridProducts.ItemsSource).Refresh();
         }
@@ -56,7 +68,9 @@ namespace Shop.Pages
         private void gridProducts_CurrentCellChanged(object sender, EventArgs e)
         {
             var t = (sender as DataGridComboBoxColumn);
+            //foreach ()
             //gridProducts.Items.Refresh();
         }
+
     }
 }
