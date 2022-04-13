@@ -72,11 +72,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SupplierId" Type="int" Nullable="false" />
-          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Data" Type="date" Nullable="false" />
+          <Property Name="SupplierId" Type="int" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Data" Type="date" />
+          <Property Name="IsDeleted" Type="bit" />
           <Property Name="StatusIntakeId" Type="int" />
-          <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductIntakeProduct">
           <Key>
@@ -289,7 +289,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductIntake_Supplier">
-          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
           <End Role="ProductIntake" Type="Self.ProductIntake" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
@@ -634,11 +634,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SupplierId" Type="Int32" Nullable="false" />
-          <Property Name="TotalAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="Data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SupplierId" Type="Int32" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Data" Type="DateTime" Precision="0" />
+          <Property Name="IsDeleted" Type="Boolean" />
           <Property Name="StatusIntakeId" Type="Int32" />
-          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="StatusIntake" Relationship="ShopBozyaModel.FK_ProductIntake_StatusIntake" FromRole="ProductIntake" ToRole="StatusIntake" />
           <NavigationProperty Name="Supplier" Relationship="ShopBozyaModel.FK_ProductIntake_Supplier" FromRole="ProductIntake" ToRole="Supplier" />
           <NavigationProperty Name="ProductIntakeProducts" Relationship="ShopBozyaModel.FK_ProductIntakeProduct_ProductIntake" FromRole="ProductIntake" ToRole="ProductIntakeProduct" />
@@ -904,7 +904,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ProductIntake_Supplier">
-          <End Type="ShopBozyaModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="ShopBozyaModel.Supplier" Role="Supplier" Multiplicity="0..1" />
           <End Type="ShopBozyaModel.ProductIntake" Role="ProductIntake" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Supplier">
@@ -1028,8 +1028,8 @@
           <EntitySetMapping Name="ProductIntakes">
             <EntityTypeMapping TypeName="ShopBozyaModel.ProductIntake">
               <MappingFragment StoreEntitySet="ProductIntake">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="StatusIntakeId" ColumnName="StatusIntakeId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Data" ColumnName="Data" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />

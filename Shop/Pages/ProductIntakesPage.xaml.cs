@@ -32,7 +32,7 @@ namespace Shop.Pages
         {
             InitializeComponent();
             Products = DataAccess.GetProducts().ToList();
-            IntakeProducts = new List<IntakeProduct>() { new IntakeProduct {cbProduct = new ComboBox(), Count= 0, PriceUnit = 0 } };
+            IntakeProducts = new List<IntakeProduct>();
             dpDate.SelectedDate = DateTime.Now;
             
             //gridProducts.ItemsSource = IntakeProducts;
@@ -40,7 +40,6 @@ namespace Shop.Pages
 
             Suppliers = DataAccess.GetSuppliers().ToList();
             cbSupplier.SelectedIndex = 0;
-            cbColumn.ItemsSource = Products;
             
             //cbColumn.DataPropertyName = "Table_ID";
             DataContext = this;
@@ -53,7 +52,7 @@ namespace Shop.Pages
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            IntakeProducts.Add(new IntakeProduct());
+            IntakeProducts.Add(new IntakeProduct() {ProductId = (cbProduct.SelectedItem as Product).Id, Product = (cbProduct.SelectedItem as Product) });
             gridProducts.Items.Refresh();
         }
 
@@ -105,15 +104,15 @@ namespace Shop.Pages
                 IsDeleted = false
             };
 
-            foreach (IntakeProduct product in IntakeProducts)
-            {
-                product.ProductId = product.Product.Id;
-            }
+            //foreach (IntakeProduct product in IntakeProducts)
+            //{
+            //    product.ProductId = product.Product.Id;
+            //}
 
-            var products = gridProducts.ItemsSource.Cast<ProductIntakeProduct>().ToList();
+            //var products = gridProducts.ItemsSource.Cast<ProductIntakeProduct>().ToList();
 
             DataAccess.SaveProductIntake(intake);
-            DataAccess.SaveProductIntakeProducts(intake.Id, products);
+            //DataAccess.SaveProductIntakeProducts(intake.Id, products);
         }
     }
 }

@@ -15,9 +15,9 @@
         <EntityTypeShape EntityType="ShopBozyaModel.ProductIntakeProduct" Width="1.5" PointX="14.25" PointY="7.625" />
         <EntityTypeShape EntityType="ShopBozyaModel.ProductOrder" Width="1.5" PointX="9.75" PointY="6.5" />
         <EntityTypeShape EntityType="ShopBozyaModel.Role" Width="1.5" PointX="0.75" PointY="5" />
-        <EntityTypeShape EntityType="ShopBozyaModel.StatusIntake" Width="1.5" PointX="9.75" PointY="3.125" />
+        <EntityTypeShape EntityType="ShopBozyaModel.StatusIntake" Width="1.5" PointX="9.75" PointY="16.125" />
         <EntityTypeShape EntityType="ShopBozyaModel.StatusOrder" Width="1.5" PointX="5.25" PointY="0.75" />
-        <EntityTypeShape EntityType="ShopBozyaModel.Supplier" Width="1.5" PointX="9.75" PointY="16.125" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Supplier" Width="1.5" PointX="9.75" PointY="3.125" />
         <EntityTypeShape EntityType="ShopBozyaModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.375" />
         <EntityTypeShape EntityType="ShopBozyaModel.Unit" Width="1.5" PointX="5.25" PointY="12.75" />
         <EntityTypeShape EntityType="ShopBozyaModel.User" Width="1.5" PointX="3" PointY="4.625" />

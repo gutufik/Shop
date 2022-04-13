@@ -96,7 +96,7 @@ namespace Core
         {
             if (GetIntakes().Where(i => i.Id == productIntake.Id).Count() == 0)
             {
-                ShopMyasnikovEntities.GetContext().ProductIntakes.Add(new ProductIntake());
+                ShopMyasnikovEntities.GetContext().ProductIntakes.Add(productIntake);
             }
             else
                 ShopMyasnikovEntities.GetContext().ProductIntakes.SingleOrDefault(i => i.Id == productIntake.Id);
