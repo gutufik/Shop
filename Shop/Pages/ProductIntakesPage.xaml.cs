@@ -101,20 +101,6 @@ namespace Shop.Pages
             
             return;
         }
-        private void SomeSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = sender as ComboBox;
-
-            ComboBox ele = gridProducts.Columns[2].GetCellContent(gridProducts.Items[0]) as ComboBox;
-            try
-            {
-                var selectedItem = ele.Text;
-                MessageBox.Show(selectedItem.ToString());
-
-            }
-            catch { }
-        }
-
         private void btnConduct_Click(object sender, RoutedEventArgs e)
         {
             Intake.SupplierId = (cbSupplier.SelectedItem as Supplier).Id;

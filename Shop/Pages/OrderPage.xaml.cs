@@ -25,18 +25,21 @@ namespace Shop.Pages
         public List<Product> Products { get; set; }
         public Order Order { get; set; }
         public List<StatusOrder> StatusOrders { get; set; }
+        public List<ProductOrder> ProductOrders { get; set; }
         public OrderPage()
         {
             InitializeComponent();
             Products = DataAccess.GetProducts().ToList();
+
             dpDate.SelectedDate = DateTime.Now;
             
             StatusOrders = DataAccess.GetStatusOrders().ToList();
-            //gridProducts.ItemsSource = IntakeProducts;
             Order = new Order
             {
                 StatusOrder = StatusOrders[0]
             };
+            //gridProducts.ItemsSource = IntakeProducts;
+            ProductOrders = Order.ProductOrders.ToList();
             cbStatus.SelectedItem = Order.StatusOrder;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
 
@@ -68,7 +71,7 @@ namespace Shop.Pages
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var product = cbProduct.SelectedItem as Product;
-            Order.ProductOrders.Add(new ProductOrder
+            ProductOrders.Add(new ProductOrder
             {
                 Product = product,
                 ProductId = product.Id
@@ -97,25 +100,18 @@ namespace Shop.Pages
                 tbSum.Text = sum.ToString();
                 (sender as DataGrid).RowEditEnding += gridProducts_RowEditEnding;
             }
-
-            //ComboBox ele = gridProducts.Columns[0].GetCellContent(gridProducts.Items[0]) as ComboBox;
-
             return;
         }
 
 
         private void btnConduct_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var productOrder in ProductOrders)
+            {
+                Order.ProductOrders.Add(productOrder);
+            }
+
             DataAccess.SaveOrder(Order);
-
-            //foreach (IntakeProduct product in IntakeProducts)
-            //{
-            //    product.ProductId = product.Product.Id;
-            //}
-
-            //var products = gridProducts.ItemsSource.Cast<ProductIntakeProduct>().ToList();
-
-            //DataAccess.SaveProductIntakeProducts(intake.Id, products);
         }
 
         private void SetEnable()

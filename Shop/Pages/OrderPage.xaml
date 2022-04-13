@@ -47,14 +47,13 @@
             <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click"/>
         </StackPanel>
         <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" Height="500" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
-                  ItemsSource="{Binding Order.ProductOrders, Mode=TwoWay}" CanUserSortColumns="False"
-                  CanUserAddRows="False"
-                  RowEditEnding="gridProducts_RowEditEnding">
+                  ItemsSource="{Binding ProductOrders, Mode=TwoWay}" CanUserSortColumns="False"
+                  CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="clProduct" Header="Товар" Binding="{Binding Product.Name, Mode=OneWay}" />
-                <DataGridTextColumn x:Name="clPrice" Header="Цена" Binding="{Binding PriceUnit, Mode=TwoWay}" />
+                <DataGridTextColumn x:Name="clPrice" Header="Цена"  />
                 <DataGridTextColumn x:Name="clCount" Header="Количество" Binding="{Binding Count}"/>
-                <DataGridTextColumn x:Name="clSum" Header="Сумма" Binding="{Binding Sum, Mode=OneWay}"/>
+                <DataGridTextColumn x:Name="clSum" Header="Сумма" />
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">

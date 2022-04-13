@@ -23,6 +23,7 @@ namespace Shop.Pages
     public partial class OrdersPage : Page
     {
         public ObservableCollection<Order> Orders { get; set; }
+
         public OrdersPage()
         {
             InitializeComponent();
