@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Core;
+using System.Collections.ObjectModel;
 
 namespace Shop.Pages
 {
@@ -20,9 +22,12 @@ namespace Shop.Pages
     /// </summary>
     public partial class OrdersPage : Page
     {
+        public ObservableCollection<Order> Orders { get; set; }
         public OrdersPage()
         {
             InitializeComponent();
+            Orders = DataAccess.GetOrders();
+            this.DataContext = this;
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -33,6 +38,13 @@ namespace Shop.Pages
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new OrderPage());
+        }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            var order = dgOrders.SelectedItem as Order;
+
+            NavigationService.Navigate(new OrderPage(order));
         }
     }
 }

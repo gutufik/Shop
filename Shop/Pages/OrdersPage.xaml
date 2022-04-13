@@ -23,14 +23,15 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
         <Button x:Name="btnCreate" Content="Создать" Click="btnCreate_Click" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
-        <DataGrid Grid.Row="2" Grid.Column="1" ItemsSource="{Binding }" AutoGenerateColumns="False" IsReadOnly="True" SelectionChanged="DataGrid_SelectionChanged">
+        <Button x:Name="btnOpen" Content="Открыть" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Click="btnOpen_Click"/>
+        <DataGrid x:Name="dgOrders" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Orders}" AutoGenerateColumns="False" IsReadOnly="True" >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер" Binding="{Binding }"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding }"/>
-                <DataGridTextColumn Header="Заказчик" Binding="{Binding }"/>
-                <DataGridTextColumn Header="Исполнитель" Binding="{Binding}"/>
-                <DataGridTextColumn Header="Количество" Binding="{Binding }"/>
-                <DataGridTextColumn Header="Этап" Binding="{Binding }"/>
+                <DataGridTextColumn Header="Идентификатор" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Кол-во товаров" Binding="{Binding ProductOrders.Count}"/>
+                <DataGridTextColumn Header="Этап" Binding="{Binding StatusOrder.Name}"/>
+                <DataGridTextColumn Header="Заказчик" Binding="{Binding Client.FIO}"/>
+                <DataGridTextColumn Header="Исполнитель" Binding="{Binding Worker.FIO}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

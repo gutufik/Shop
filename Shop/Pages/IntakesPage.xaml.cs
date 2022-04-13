@@ -33,5 +33,11 @@ namespace Shop.Pages
         {
             NavigationService.Navigate(new Pages.IntakeProductsPage());
         }
+
+        private void btnOpen_Click(object sender, RoutedEventArgs e)
+        {
+            var intake = dgIntakes.SelectedItem as ProductIntake;
+            NavigationService.Navigate(new Pages.IntakeProductsPage(intake));
+        }
     }
 }

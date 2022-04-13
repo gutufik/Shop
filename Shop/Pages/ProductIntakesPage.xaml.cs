@@ -27,10 +27,12 @@ namespace Shop.Pages
         public List<Supplier> Suppliers { get; set; }
         public List<IntakeProduct> IntakeProducts { get; set; }
 
-
+        public ProductIntake Intake { get; set; }
         public IntakeProductsPage()
         {
             InitializeComponent();
+
+            Intake = new ProductIntake();
             Products = DataAccess.GetProducts().ToList();
             IntakeProducts = new List<IntakeProduct>();
             dpDate.SelectedDate = DateTime.Now;
@@ -44,7 +46,23 @@ namespace Shop.Pages
             //cbColumn.DataPropertyName = "Table_ID";
             DataContext = this;
         }
+        public IntakeProductsPage(ProductIntake intake)
+        {
+            InitializeComponent();
+            Intake = intake;
+            Products = DataAccess.GetProducts().ToList();
+            IntakeProducts = new List<IntakeProduct>();
+            dpDate.SelectedDate = DateTime.Now;
 
+            //gridProducts.ItemsSource = IntakeProducts;
+            gridProducts.SelectionMode = DataGridSelectionMode.Extended;
+
+            Suppliers = DataAccess.GetSuppliers().ToList();
+            cbSupplier.SelectedIndex = 0;
+
+            //cbColumn.DataPropertyName = "Table_ID";
+            DataContext = this;
+        }
         private void gridProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var t = (sender as Product);
@@ -52,7 +70,11 @@ namespace Shop.Pages
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            IntakeProducts.Add(new IntakeProduct() {ProductId = (cbProduct.SelectedItem as Product).Id, Product = (cbProduct.SelectedItem as Product) });
+            var product = cbProduct.SelectedItem as Product;
+            IntakeProducts.Add(new IntakeProduct() {ProductId = product.Id, Product = product });
+
+            Products.Remove(product);
+
             gridProducts.Items.Refresh();
         }
 
@@ -95,23 +117,27 @@ namespace Shop.Pages
 
         private void btnConduct_Click(object sender, RoutedEventArgs e)
         {
-            ProductIntake intake = new ProductIntake {
-                Id = 0,
-                SupplierId = (cbSupplier.SelectedItem as Supplier).Id,
-                TotalAmount = decimal.Parse(tbSum.Text),
-                Data = (DateTime)dpDate.SelectedDate,
-                StatusIntakeId = 2,
-                IsDeleted = false
-            };
+            Intake.SupplierId = (cbSupplier.SelectedItem as Supplier).Id;
+            Intake.TotalAmount = decimal.Parse(tbSum.Text);
+            Intake.Data = (DateTime)dpDate.SelectedDate;
+            Intake.StatusIntakeId = 2;
+            Intake.IsDeleted = false;
+            
 
-            //foreach (IntakeProduct product in IntakeProducts)
-            //{
-            //    product.ProductId = product.Product.Id;
-            //}
+            foreach (IntakeProduct product in IntakeProducts)
+            {
+                Intake.ProductIntakeProducts.Add(new ProductIntakeProduct 
+                { 
+                    Product = product.Product,
+                    ProductId = product.ProductId,
+                    Count = product.Count,
+                    PriceUnit = product.PriceUnit
+                });
+            }
 
             //var products = gridProducts.ItemsSource.Cast<ProductIntakeProduct>().ToList();
 
-            DataAccess.SaveProductIntake(intake);
+            DataAccess.SaveProductIntake(Intake);
             //DataAccess.SaveProductIntakeProducts(intake.Id, products);
         }
     }
