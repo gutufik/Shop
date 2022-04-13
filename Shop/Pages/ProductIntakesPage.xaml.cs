@@ -97,10 +97,11 @@ namespace Shop.Pages
         private void btnConduct_Click(object sender, RoutedEventArgs e)
         {
             ProductIntake intake = new ProductIntake {
+                Id = 0,
                 SupplierId = (cbSupplier.SelectedItem as Supplier).Id,
                 TotalAmount = decimal.Parse(tbSum.Text),
                 Data = (DateTime)dpDate.SelectedDate,
-                StatucIntakeId = 2,
+                StatusIntakeId = 2,
                 IsDeleted = false
             };
 
