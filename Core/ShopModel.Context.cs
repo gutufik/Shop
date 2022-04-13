@@ -13,10 +13,10 @@ namespace Core
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ShopBozyaEntities : DbContext
+    public partial class ShopMyasnikovEntities : DbContext
     {
-        public ShopBozyaEntities()
-            : base("name=ShopBozyaEntities")
+        public ShopMyasnikovEntities()
+            : base("name=ShopMyasnikovEntities")
         {
         }
     
@@ -25,5 +25,22 @@ namespace Core
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Client> Clients { get; set; }
+        public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<Gender> Genders { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductCountry> ProductCountries { get; set; }
+        public virtual DbSet<ProductIntake> ProductIntakes { get; set; }
+        public virtual DbSet<ProductIntakeProduct> ProductIntakeProducts { get; set; }
+        public virtual DbSet<ProductOrder> ProductOrders { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<StatusIntake> StatusIntakes { get; set; }
+        public virtual DbSet<StatusOrder> StatusOrders { get; set; }
+        public virtual DbSet<Supplier> Suppliers { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Worker> Workers { get; set; }
     }
 }

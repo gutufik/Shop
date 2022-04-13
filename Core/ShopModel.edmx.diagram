@@ -5,6 +5,40 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dd42c8ecbb324a19a2a929b9f667b17f" Name="Diagram1" ZoomLevel="106">
+        <EntityTypeShape EntityType="ShopBozyaModel.Client" Width="1.5" PointX="5.25" PointY="4.25" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Country" Width="1.5" PointX="7.5" PointY="18.625" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Gender" Width="1.5" PointX="3" PointY="2" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Order" Width="1.5" PointX="7.5" PointY="6.125" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Product" Width="1.5" PointX="7.5" PointY="12.125" />
+        <EntityTypeShape EntityType="ShopBozyaModel.ProductCountry" Width="1.5" PointX="9.75" PointY="12.5" />
+        <EntityTypeShape EntityType="ShopBozyaModel.ProductIntake" Width="1.5" PointX="12" PointY="2.625" />
+        <EntityTypeShape EntityType="ShopBozyaModel.ProductIntakeProduct" Width="1.5" PointX="14.25" PointY="7.625" />
+        <EntityTypeShape EntityType="ShopBozyaModel.ProductOrder" Width="1.5" PointX="9.75" PointY="6.5" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Role" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="ShopBozyaModel.StatusIntake" Width="1.5" PointX="9.75" PointY="3.125" />
+        <EntityTypeShape EntityType="ShopBozyaModel.StatusOrder" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Supplier" Width="1.5" PointX="9.75" PointY="16.125" />
+        <EntityTypeShape EntityType="ShopBozyaModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.375" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Unit" Width="1.5" PointX="5.25" PointY="12.75" />
+        <EntityTypeShape EntityType="ShopBozyaModel.User" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="ShopBozyaModel.Worker" Width="1.5" PointX="5.25" PointY="8.875" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Client_Gender" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Client_User1" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Order_Client" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Order_Client1" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductCountry_Country" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Order_StatusOrder" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Order_Worker" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductOrder_Order" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Product_Unit" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductCountry_Product" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductIntakeProduct_Product" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductOrder_Product" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductIntake_StatusIntake" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductIntake_Supplier" />
+        <AssociationConnector Association="ShopBozyaModel.FK_ProductIntakeProduct_ProductIntake" />
+        <AssociationConnector Association="ShopBozyaModel.FK_User_Role" />
+        <AssociationConnector Association="ShopBozyaModel.FK_Worker_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
