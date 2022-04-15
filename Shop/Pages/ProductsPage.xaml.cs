@@ -195,5 +195,9 @@ namespace Shop.Pages
         {
             NavigationService.Navigate(new Pages.ProductPage());
         }
+        private void btnOrders_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage());
+        }
     }
 }

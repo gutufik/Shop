@@ -78,10 +78,5 @@ namespace Shop.Pages
                 MessageBox.Show("Неверный логин или пароль", "Ошибка");
             }
         }
-
-        private void btnOrders_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new OrdersPage());
-        }
     }
 }

@@ -46,17 +46,5 @@ namespace Shop.Pages
             if (DataAccess.RegistartionUser(login, passwrod))
                 NavigationService.Navigate(new AuthorizationPage());
         }
-
-        private void btnGoBack_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoBack)
-                NavigationService.GoBack();
-        }
-
-        private void btnGoForward_Click(object sender, RoutedEventArgs e)
-        {
-            if (NavigationService.CanGoForward)
-                NavigationService.GoForward();
-        }
     }
 }

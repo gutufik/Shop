@@ -93,7 +93,12 @@ namespace Shop.Pages
 
             if (fileDialog.ShowDialog().Value)
             {
-                Product.Photo = File.ReadAllBytes(fileDialog.FileName);
+                var photo = File.ReadAllBytes(fileDialog.FileName);
+                if (photo.Length > 1024 * 150)  //Размер фотографии не должен превышать 150 Кбайт
+                {
+                    MessageBox.Show("Размер фотографии не должен превышать 150 КБ", "Ошибка");
+                    return;
+                }
                 imageProduct.Source = new BitmapImage(new Uri(fileDialog.FileName));
             }
         }
