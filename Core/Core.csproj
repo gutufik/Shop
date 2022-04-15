@@ -63,6 +63,8 @@
     <Compile Include="Order.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="PartProductOrder.cs" />
+    <Compile Include="PartProductIntakeProduct.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>ShopModel.tt</DependentUpon>
     </Compile>

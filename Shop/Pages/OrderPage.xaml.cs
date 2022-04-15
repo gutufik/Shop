@@ -59,7 +59,7 @@ namespace Shop.Pages
             ProductOrders = Order.ProductOrders.ToList();
             //gridProducts.ItemsSource = IntakeProducts;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
-            //cbColumn.DataPropertyName = "Table_ID";
+            tbSum.Text = ProductOrders.Sum(po=> po.Sum).ToString();
             this.DataContext = this;
             SetEnable();
         }
@@ -94,7 +94,7 @@ namespace Shop.Pages
                 (sender as DataGrid).Items.Refresh();
 
                 decimal sum = 0;
-                foreach (IntakeProduct product in gridProducts.ItemsSource)
+                foreach (ProductIntakeProduct product in gridProducts.ItemsSource)
                 {
                     sum += product.Sum;
                 }

@@ -46,14 +46,15 @@
             </ComboBox>
             <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click"/>
         </StackPanel>
-        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" Height="500" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
+        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
                   ItemsSource="{Binding ProductOrders, Mode=TwoWay}" CanUserSortColumns="False"
-                  CanUserAddRows="False">
+                  CanUserAddRows="False"
+                  RowEditEnding="gridProducts_RowEditEnding">
             <DataGrid.Columns>
-                <DataGridTextColumn x:Name="clProduct" Header="Товар" Binding="{Binding Product.Name, Mode=OneWay}" />
-                <DataGridTextColumn x:Name="clPrice" Header="Цена"  />
+                <DataGridTextColumn x:Name="clProduct" Header="Товар" Binding="{Binding Product.Name, Mode=OneWay}" IsReadOnly="True" />
+                <DataGridTextColumn x:Name="clPrice" Header="Цена" Binding="{Binding Product.Price, Mode=TwoWay}"  IsReadOnly="True"/>
                 <DataGridTextColumn x:Name="clCount" Header="Количество" Binding="{Binding Count}"/>
-                <DataGridTextColumn x:Name="clSum" Header="Сумма" />
+                <DataGridTextColumn x:Name="clSum" Header="Сумма" Binding="{Binding Sum, Mode=OneWay}" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="4" Grid.Column="1">

@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using Core;
 
-namespace Shop
+namespace Core
 {
-    public partial class IntakeProduct : ProductIntakeProduct
+    public partial class ProductOrder
     {
-        public ComboBox cbProduct { get; set; }
         public decimal Sum => Count * (int)Product.Price;
     }
 }
