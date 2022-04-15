@@ -23,7 +23,7 @@
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <ComboBox x:Name="cbUnits" ItemsSource="{Binding Units}" SelectionChanged="cbUnits_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -36,7 +36,7 @@
                 <ComboBoxItem>Все</ComboBoxItem>
                 <ComboBoxItem>Текущий месяц</ComboBoxItem>
             </ComboBox>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" >
                 <TextBlock Text="Сортировка"/>
                 <ComboBox x:Name="cbSort" SelectionChanged="cbSort_SelectionChanged">
                     <ComboBoxItem Content="А-Я"/>
@@ -45,8 +45,8 @@
                     <ComboBoxItem Content="Сначала новые"/>
                 </ComboBox>
             </StackPanel>
-            <Button Content="Invoices" Click="Button_Click"/>
-            <Button x:Name="btnOrders" Content="Orders" Click="btnOrders_Click"/>
+            <Button x:Name="btnInvoices" Content="Поставки" Click="btnInvoices_Click"/>
+            <Button x:Name="btnOrders" Content="Заказы" Click="btnOrders_Click"/>
         </StackPanel>
 
         <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" IsReadOnly="True" 
@@ -85,7 +85,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center">
             <Button Content="&lt;" Width="30" x:Name="btnPreviousPage" Click="btnPreviousPage_Click"/>
             <Label x:Name="lblWithdraw" VerticalAlignment="Center"/>
             <Button Content=">" Width="30" x:Name="btnNextPage" Click="btnNextPage_Click"/>

@@ -39,9 +39,9 @@
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="Background" Value="#ad7261"/>
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Margin" Value="20"/>
-            <Setter Property="Padding" Value="10"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="20, 5"/>
+            <Setter Property="Padding" Value="5"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>

@@ -162,7 +162,6 @@ namespace Shop.Pages
         {
             ApplyFilters();
             
-
             var sort = (cbSort.SelectedItem as ComboBoxItem).Content.ToString();
             ProductsForSearch = ProductsForSearch.OrderBy(Sortings[sort]).ToList();
             if (sort == "Я-А" || sort == "Сначала новые")
@@ -171,7 +170,7 @@ namespace Shop.Pages
             GoPagination();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnInvoices_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Pages.IntakesPage());
         }
