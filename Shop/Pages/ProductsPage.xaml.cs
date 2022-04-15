@@ -22,7 +22,7 @@ namespace Shop.Pages
     public partial class ProductsPage : Page
     {
         public ObservableCollection<Unit> Units { get; set; }
-        public ObservableCollection<Product> Products { get; set; }
+        public List<Product> Products { get; set; }
         public List<Product> ProductsForSearch { get; set; }
         private Dictionary<string, Func<Product, object>> Sortings;
 
@@ -31,7 +31,7 @@ namespace Shop.Pages
         public ProductsPage()
         {
             InitializeComponent();
-            Products = DataAccess.GetProducts();
+            Products = DataAccess.GetProducts().ToList();
             ProductsForSearch = Products.ToList();
             Units = DataAccess.GetUnits();
 
@@ -65,7 +65,7 @@ namespace Shop.Pages
                 var unit = cbUnits.SelectedItem as Unit;
 
                 if (unit.Name == "Все")
-                    ProductsForSearch = Products.ToList();
+                    ProductsForSearch = Products;
                 else
                     ProductsForSearch = Products.Where(p => p.UnitId == unit.Id).ToList();
 
@@ -174,6 +174,26 @@ namespace Shop.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Pages.IntakesPage());
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var products = dgProducts.SelectedItems.Cast<Product>().ToList();
+
+            foreach (var product in products)
+            {
+                var result = MessageBox.Show($"Вы точно хотите удалить {product.Name}?", "Предупреждение", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                    DataAccess.DeleteProduct(product);
+            }
+            Products = DataAccess.GetProducts().ToList();
+            ApplyFilters();
+            GoPagination();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Pages.ProductPage());
         }
     }
 }

@@ -49,6 +49,7 @@ namespace Shop.Pages
                     Properties.Settings.Default.Login = null;
                 Properties.Settings.Default.LastLoginAttempt = DateTime.MinValue;
                 Properties.Settings.Default.Save();
+                App.User = DataAccess.GetUser(login, password);
                 NavigationService.Navigate(new ProductsPage());
             }
             else if (Properties.Settings.Default.attemptsCount == 2 || Properties.Settings.Default.LastLoginAttempt != DateTime.MinValue)
@@ -76,32 +77,6 @@ namespace Shop.Pages
                 Properties.Settings.Default.Save();
                 MessageBox.Show("Неверный логин или пароль", "Ошибка");
             }
-        }
-        private bool IsPasswordCorrect()
-        {
-            var result = true;
-            if (Properties.Settings.Default.LastLoginAttempt != DateTime.MinValue || Properties.Settings.Default.attemptsCount == 2)
-            {
-                if (!((Properties.Settings.Default.LastLoginAttempt == DateTime.MinValue) != (Properties.Settings.Default.attemptsCount == 2)) )
-                {
-                    Properties.Settings.Default.LastLoginAttempt = DateTime.Now;
-                    MessageBox.Show("Ты поставлен на счетчик, у тебя 1 минута", "Ошибка");
-                    Properties.Settings.Default.Save();
-                    result = false;
-                }
-                else if (DateTime.Now - Properties.Settings.Default.LastLoginAttempt >= TimeSpan.FromMinutes(1))
-                {
-                    Properties.Settings.Default.attemptsCount = 0;
-                    Properties.Settings.Default.LastLoginAttempt = DateTime.MinValue;
-                    Properties.Settings.Default.Save();
-                }
-                else 
-                {
-                    MessageBox.Show($"Ты поставлен на счетчик, у тебя {60 - (DateTime.Now - Properties.Settings.Default.LastLoginAttempt).TotalSeconds} сек", "Ошибка");
-                    result = false;
-                }
-            }
-            return result;
         }
 
         private void btnOrders_Click(object sender, RoutedEventArgs e)

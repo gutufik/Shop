@@ -92,8 +92,9 @@
                 <ComboBoxItem>200</ComboBoxItem>
                 <ComboBoxItem>Все</ComboBoxItem>
             </ComboBox>
-            <Button x:Name="btnDelete" Content="Удалить" IsEnabled="False"/>
+            <Button x:Name="btnDelete" Content="Удалить" IsEnabled="False" Click="btnDelete_Click"/>
             <Button x:Name="btnEdit" Content="Изменить" IsEnabled="False" Click="btnEdit_Click"/>
+            <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click" />
             <Label x:Name="lblWithdraw"/>
         </StackPanel>
     </Grid>

@@ -43,7 +43,21 @@ namespace Shop.Pages
 
             this.DataContext = Product;
         }
+        public ProductPage()
+        {
+            InitializeComponent();
+            Product = new Product();
+            Units = DataAccess.GetUnits().ToList();
+            Countries = DataAccess.GetCountries().ToList();
+            FillCountries();
+            cbCounties.ItemsSource = Countries;
+            lvCountries.ItemsSource = ProductCountries;
+            cbUnits.ItemsSource = Units;
+            cbUnits.SelectedIndex = 0;
 
+
+            this.DataContext = Product;
+        }
         private void FillCountries()
         {
             ProductCountries = new List<Country>();
@@ -56,10 +70,17 @@ namespace Shop.Pages
 
         private void btnComplete_Click(object sender, RoutedEventArgs e)
         {
-            Product.Name = tbName.Text;
             Product.UnitId = (cbUnits.SelectedItem as Unit).Id;
-            Product.Description = tbDescription.Text;
-            //DataAccess.SaveProduct(Product);
+
+            if (!DataAccess.CheckContent(Product.Name, Product.Description))
+            {
+                MessageBox.Show("Поля наименование и комментарий могут содержать в себе только буквы и следующие символы: пробел и дефис", "Ошибка");
+                return;
+            }
+
+            DataAccess.SaveProduct(Product);
+            DataAccess.SaveProductCountries(Product.Id, lvCountries.Items.Cast<Country>().ToList());
+            NavigationService.GoBack();
 
         }
 
