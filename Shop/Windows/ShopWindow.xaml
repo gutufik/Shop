@@ -12,7 +12,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Button x:Name="btnGoBack" Content="Назад" Click="btnGoBack_Click"/>

@@ -21,6 +21,7 @@
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="spId" Grid.Column="1" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -48,6 +49,10 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
         </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" >
+            <TextBlock Text="Цена"/>
+            <TextBox x:Name="tbPrice" Text="{Binding Price}" TextWrapping="Wrap"  Width="200" Margin="10"/>
+        </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.RowSpan="5" Grid.Column="0" VerticalAlignment="Center" Margin="5">
             <TextBlock Text="Изображение" Margin="0,20"/>
@@ -73,6 +78,6 @@
             </ComboBox>
         </StackPanel>
 
-        <Button x:Name="btnComplete" Content="Сохранить" Grid.Column="1" Grid.Row="4" Click="btnComplete_Click"/>
+        <Button x:Name="btnComplete" Content="Сохранить" Grid.Column="1" Grid.Row="5" Click="btnComplete_Click"/>
     </Grid>
 </Page>

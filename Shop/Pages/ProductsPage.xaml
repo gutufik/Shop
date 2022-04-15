@@ -49,7 +49,8 @@
             <Button x:Name="btnOrders" Content="Orders" Click="btnOrders_Click"/>
         </StackPanel>
 
-        <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="dgProducts_SelectionChanged">
+        <DataGrid x:Name="dgProducts" Grid.Row="2" Grid.Column="1" IsReadOnly="True" 
+                  AutoGenerateColumns="False" SelectionChanged="dgProducts_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Идентификатор" Binding="{Binding Id}" />
                 <DataGridTemplateColumn Header="Фото">
@@ -86,6 +87,7 @@
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="1">
             <Button Content="&lt;" Width="30" x:Name="btnPreviousPage" Click="btnPreviousPage_Click"/>
+            <Label x:Name="lblWithdraw" VerticalAlignment="Center"/>
             <Button Content=">" Width="30" x:Name="btnNextPage" Click="btnNextPage_Click"/>
             <ComboBox x:Name="cbCountPerPage" SelectionChanged="cbCountPerPage_SelectionChanged">
                 <ComboBoxItem>10</ComboBoxItem>
@@ -96,7 +98,6 @@
             <Button x:Name="btnDelete" Content="Удалить" IsEnabled="False" Click="btnDelete_Click"/>
             <Button x:Name="btnEdit" Content="Изменить" IsEnabled="False" Click="btnEdit_Click"/>
             <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click" />
-            <Label x:Name="lblWithdraw"/>
         </StackPanel>
     </Grid>
 </Page>

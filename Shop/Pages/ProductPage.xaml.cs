@@ -99,6 +99,7 @@ namespace Shop.Pages
                     MessageBox.Show("Размер фотографии не должен превышать 150 КБ", "Ошибка");
                     return;
                 }
+                Product.Photo = photo;
                 imageProduct.Source = new BitmapImage(new Uri(fileDialog.FileName));
             }
         }
