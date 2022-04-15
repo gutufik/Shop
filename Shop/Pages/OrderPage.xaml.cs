@@ -56,6 +56,7 @@ namespace Shop.Pages
 
             StatusOrders = DataAccess.GetStatusOrders().ToList();
             cbStatus.SelectedItem = Order.StatusOrder;
+            ProductOrders = Order.ProductOrders.ToList();
             //gridProducts.ItemsSource = IntakeProducts;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
             //cbColumn.DataPropertyName = "Table_ID";

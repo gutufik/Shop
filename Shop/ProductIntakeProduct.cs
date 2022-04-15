@@ -11,7 +11,6 @@ namespace Shop
     public partial class IntakeProduct : ProductIntakeProduct
     {
         public ComboBox cbProduct { get; set; }
-        public decimal Sum => Count * PriceUnit;
-        //public override decimal PriceUnit { get;  }
+        public decimal Sum => Count * (int)Product.Price;
     }
 }

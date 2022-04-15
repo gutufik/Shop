@@ -57,6 +57,7 @@
           <Property Name="UnitId" Type="int" Nullable="false" />
           <Property Name="AddDate" Type="date" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="int" />
         </EntityType>
         <EntityType Name="ProductCountry">
           <Key>
@@ -617,6 +618,7 @@
           <NavigationProperty Name="ProductCountries" Relationship="ShopBozyaModel.FK_ProductCountry_Product" FromRole="Product" ToRole="ProductCountry" />
           <NavigationProperty Name="ProductIntakeProducts" Relationship="ShopBozyaModel.FK_ProductIntakeProduct_Product" FromRole="Product" ToRole="ProductIntakeProduct" />
           <NavigationProperty Name="ProductOrders" Relationship="ShopBozyaModel.FK_ProductOrder_Product" FromRole="Product" ToRole="ProductOrder" />
+          <Property Name="Price" Type="Int32" />
         </EntityType>
         <EntityType Name="ProductCountry">
           <Key>
@@ -1005,6 +1007,7 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="ShopBozyaModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="AddDate" ColumnName="AddDate" />
                 <ScalarProperty Name="UnitId" ColumnName="UnitId" />

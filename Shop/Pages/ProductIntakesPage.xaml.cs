@@ -52,6 +52,7 @@ namespace Shop.Pages
             Intake = intake;
             Products = DataAccess.GetProducts().ToList();
             IntakeProducts = new List<IntakeProduct>();
+            //IntakeProducts = Intake.ProductIntakeProducts.ToList();
             dpDate.SelectedDate = DateTime.Now;
 
             //gridProducts.ItemsSource = IntakeProducts;

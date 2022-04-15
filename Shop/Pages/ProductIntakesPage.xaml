@@ -44,13 +44,13 @@
             </ComboBox>
             <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click"/>
         </StackPanel>
-        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" Height="500" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
+        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
                   ItemsSource="{Binding IntakeProducts, Mode=TwoWay}" CanUserSortColumns="False"
                   CanUserAddRows="False"
                   RowEditEnding="gridProducts_RowEditEnding">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="clProduct" Header="Товар" Binding="{Binding Product.Name, Mode=OneWay}" />
-                <DataGridTextColumn x:Name="clPrice" Header="Цена" Binding="{Binding PriceUnit, Mode=TwoWay}" />
+                <DataGridTextColumn x:Name="clPrice" Header="Цена" Binding="{Binding Product.Price, Mode=TwoWay}" />
                 <DataGridTextColumn x:Name="clCount" Header="Количество" Binding="{Binding Count}"/>
                 <DataGridTextColumn x:Name="clSum" Header="Сумма" Binding="{Binding Sum, Mode=OneWay}"/>
             </DataGrid.Columns>
