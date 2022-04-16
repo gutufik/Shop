@@ -28,7 +28,7 @@
                   AutoGenerateColumns="False" IsReadOnly="True" >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Идентификатор" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Date}"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=d, ConverterCulture=ru-RU}"/>
                 <DataGridTextColumn Header="Кол-во товаров" Binding="{Binding ProductOrders.Count}"/>
                 <DataGridTextColumn Header="Этап" Binding="{Binding StatusOrder.Name}"/>
                 <DataGridTextColumn Header="Заказчик" Binding="{Binding Client.FIO}"/>

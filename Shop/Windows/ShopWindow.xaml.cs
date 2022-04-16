@@ -23,24 +23,7 @@ namespace Shop.Windows
         public ShopWindow()
         {
             InitializeComponent();
-            frame.Navigated += (s,e) => 
-            {
-                if (frame.Content is Pages.AuthorizationPage)
-                {
-                    btnGoForward.Visibility = Visibility.Hidden;
-                    btnGoBack.Visibility = Visibility.Hidden;
-                }
-                else if (frame.Content is Pages.RegistrationPage)
-                {
-                    btnGoForward.Visibility = Visibility.Hidden;
-                    btnGoBack.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    btnGoBack.Visibility = Visibility.Visible;
-                    btnGoForward.Visibility = Visibility.Visible;
-                }
-            };
+            frame.Navigated += FrameNavigated;
             frame.NavigationService.Navigate(new Pages.AuthorizationPage());
         }
 
@@ -54,6 +37,24 @@ namespace Shop.Windows
         {
             if (frame.NavigationService.CanGoForward)
                 frame.NavigationService.GoForward();
+        }
+        private void FrameNavigated(object sender, NavigationEventArgs e)
+        {
+            if (frame.Content is Pages.AuthorizationPage)
+            {
+                btnGoForward.Visibility = Visibility.Hidden;
+                btnGoBack.Visibility = Visibility.Hidden;
+            }
+            else if (frame.Content is Pages.RegistrationPage)
+            {
+                btnGoForward.Visibility = Visibility.Hidden;
+                btnGoBack.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                btnGoBack.Visibility = Visibility.Visible;
+                btnGoForward.Visibility = Visibility.Visible;
+            }
         }
     }
 }

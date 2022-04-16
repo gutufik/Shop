@@ -29,7 +29,7 @@
                 <DataGridTextColumn Header="Идентификатор" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Поставщик" Binding="{Binding Supplier.Name}"/>
                 <DataGridTextColumn Header="Сумма" Binding="{Binding TotalAmount}"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Data}"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Data, StringFormat=d, ConverterCulture=ru-RU}"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

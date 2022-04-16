@@ -68,7 +68,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Дата добавления" Binding="{Binding AddDate}"/>
+                <DataGridTextColumn Header="Дата добавления" Binding="{Binding AddDate, StringFormat=d, ConverterCulture=ru-RU}"/>
                 <DataGridTextColumn Header="Единица измерения" Binding="{Binding Unit.Name}"/>
                 <DataGridTemplateColumn Header="Страны-поставщики">
                     <DataGridTemplateColumn.CellTemplate>

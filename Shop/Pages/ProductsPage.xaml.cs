@@ -46,15 +46,28 @@ namespace Shop.Pages
             Units.Add(new Unit { Name = "Все"});
             startIndex = 0;
             cbCountPerPage.SelectedIndex = 0;
-            
 
             countPerPage = Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
             cbMonthFilter.SelectedIndex = 0;
 
             cbUnits.SelectedIndex = Units.Count - 1;
             cbSort.SelectedIndex = 0;
+            SetUserRestrictions();
             this.DataContext = this;
         }
+        private void SetUserRestrictions()
+        {
+            if (App.User.RoleId == 3)
+            {
+                btnAdd.Visibility = Visibility.Hidden;
+                btnDelete.Visibility = Visibility.Hidden;
+                btnEdit.Visibility = Visibility.Hidden;
+
+                btnInvoices.Visibility = Visibility.Hidden;
+                btnOrders.Visibility = Visibility.Hidden;
+            }
+        }
+
         private void ApplyFilters()
         {
             if (cbMonthFilter.SelectedItem != null & cbUnits.SelectedItem != null & cbSort.SelectedItem != null)
