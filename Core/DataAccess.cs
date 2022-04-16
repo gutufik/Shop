@@ -14,8 +14,14 @@ namespace Core
         {
             return new ObservableCollection<User>(ShopMyasnikovEntities.GetContext().Users);
         }
-        
-
+        public static Client GetClient(User user)
+        {
+            return ShopMyasnikovEntities.GetContext().Clients.Where(cl => cl.UserId == user.Id).FirstOrDefault();
+        }
+        public static Worker GetWorker(User user)
+        {
+            return ShopMyasnikovEntities.GetContext().Workers.Where(w => w.UserId == user.Id).FirstOrDefault();
+        }
         public static User GetUser(int id)
         {
             return GetUsers().Where(user => user.Id == id).FirstOrDefault();

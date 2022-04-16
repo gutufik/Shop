@@ -67,7 +67,6 @@ namespace Shop.Pages
                 btnOrders.Visibility = Visibility.Hidden;
             }
         }
-
         private void ApplyFilters()
         {
             if (cbMonthFilter.SelectedItem != null & cbUnits.SelectedItem != null & cbSort.SelectedItem != null)

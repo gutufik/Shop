@@ -38,12 +38,10 @@ namespace Shop.Pages
             {
                 StatusOrder = StatusOrders[0]
             };
-            //gridProducts.ItemsSource = IntakeProducts;
             ProductOrders = Order.ProductOrders.ToList();
             cbStatus.SelectedItem = Order.StatusOrder;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
 
-            //cbColumn.DataPropertyName = "Table_ID";
             this.DataContext = this;
         }
 
@@ -57,18 +55,11 @@ namespace Shop.Pages
             StatusOrders = DataAccess.GetStatusOrders().ToList();
             cbStatus.SelectedItem = Order.StatusOrder;
             ProductOrders = Order.ProductOrders.ToList();
-            //gridProducts.ItemsSource = IntakeProducts;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
             tbSum.Text = ProductOrders.Sum(po=> po.Sum).ToString();
             this.DataContext = this;
             SetEnable();
         }
-
-        private void gridProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var t = (sender as Product);
-        }
-
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
             var product = cbProduct.SelectedItem as Product;
@@ -77,13 +68,9 @@ namespace Shop.Pages
                 Product = product,
                 ProductId = product.Id
             });
-
-            //IntakeProducts.Add(new IntakeProduct() { ProductId = (cbProduct.SelectedItem as Product).Id, Product = (cbProduct.SelectedItem as Product) });
             gridProducts.Items.Refresh();
             Products.Remove(product);
         }
-
-
         private void gridProducts_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
         {
             if (this.gridProducts.SelectedItem != null)
@@ -94,7 +81,7 @@ namespace Shop.Pages
                 (sender as DataGrid).Items.Refresh();
 
                 decimal sum = 0;
-                foreach (ProductIntakeProduct product in gridProducts.ItemsSource)
+                foreach (ProductOrder product in gridProducts.ItemsSource)
                 {
                     sum += product.Sum;
                 }
@@ -103,18 +90,22 @@ namespace Shop.Pages
             }
             return;
         }
-
-
         private void btnConduct_Click(object sender, RoutedEventArgs e)
         {
             foreach (var productOrder in ProductOrders)
             {
                 Order.ProductOrders.Add(productOrder);
             }
-
+            if (App.User.RoleId == 2)
+            {
+                Order.Client = DataAccess.GetClient(App.User);
+            }
+            else
+            {
+                Order.Worker = DataAccess.GetWorker(App.User);
+            }
             DataAccess.SaveOrder(Order);
         }
-
         private void SetEnable()
         {
             if (Order.StatusOrder.Name != "Новый")

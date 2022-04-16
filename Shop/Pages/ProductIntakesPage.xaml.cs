@@ -37,14 +37,11 @@ namespace Shop.Pages
             Products = DataAccess.GetProducts().ToList();
             IntakeProducts = new List<ProductIntakeProduct>();
             dpDate.SelectedDate = DateTime.Now;
-            
-            //gridProducts.ItemsSource = IntakeProducts;
+
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
 
             Suppliers = DataAccess.GetSuppliers().ToList();
             cbSupplier.SelectedIndex = 0;
-            
-            //cbColumn.DataPropertyName = "Table_ID";
             DataContext = this;
         }
         public IntakeProductsPage(ProductIntake intake)
@@ -53,17 +50,12 @@ namespace Shop.Pages
             Intake = intake;
             Products = DataAccess.GetProducts().ToList();
             IntakeProducts = intake.ProductIntakeProducts.ToList();
-
-            //IntakeProducts = Intake.ProductIntakeProducts.ToList();
             dpDate.SelectedDate = DateTime.Now;
-
-            //gridProducts.ItemsSource = IntakeProducts;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
 
             Suppliers = DataAccess.GetSuppliers().ToList();
             cbSupplier.SelectedIndex = 0;
             tbSum.Text = ((int)Intake.TotalAmount).ToString();
-            //cbColumn.DataPropertyName = "Table_ID";
             this.DataContext = this;
         }
         private void gridProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -87,7 +79,6 @@ namespace Shop.Pages
             if (this.gridProducts.SelectedItem != null)
             {
                 (sender as DataGrid).RowEditEnding -= gridProducts_RowEditEnding;
-                //(gridProducts.SelectedItem as IntakeProduct).ProductId = (gridProducts.SelectedItem as IntakeProduct).Product.Id;
                 (sender as DataGrid).CommitEdit();
                 (sender as DataGrid).Items.Refresh();
 
@@ -99,9 +90,6 @@ namespace Shop.Pages
                 tbSum.Text = sum.ToString();
                 (sender as DataGrid).RowEditEnding += gridProducts_RowEditEnding;
             }
-
-            //ComboBox ele = gridProducts.Columns[0].GetCellContent(gridProducts.Items[0]) as ComboBox;
-            
             return;
         }
         private void btnConduct_Click(object sender, RoutedEventArgs e)
@@ -113,10 +101,7 @@ namespace Shop.Pages
             Intake.IsDeleted = false;
             Intake.ProductIntakeProducts = IntakeProducts;
 
-            //var products = gridProducts.ItemsSource.Cast<ProductIntakeProduct>().ToList();
-
             DataAccess.SaveProductIntake(Intake);
-            //DataAccess.SaveProductIntakeProducts(intake.Id, products);
         }
     }
 }

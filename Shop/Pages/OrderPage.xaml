@@ -46,7 +46,7 @@
             </ComboBox>
             <Button x:Name="btnAdd" Content="Добавить" Click="btnAdd_Click"/>
         </StackPanel>
-        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" AutoGenerateColumns="False" SelectionChanged="gridProducts_SelectionChanged"
+        <DataGrid Grid.Row="3" x:Name="gridProducts" Grid.Column="0" Grid.ColumnSpan="4" CanUserDeleteRows="True" AutoGenerateColumns="False"
                   ItemsSource="{Binding ProductOrders, Mode=TwoWay}" CanUserSortColumns="False"
                   CanUserAddRows="False"
                   RowEditEnding="gridProducts_RowEditEnding">

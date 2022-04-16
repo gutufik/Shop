@@ -26,18 +26,29 @@ namespace Shop.Pages
         {
             InitializeComponent();
             Intakes = DataAccess.GetIntakes().ToList();
+            SetUserRestrictions();
             this.DataContext = this;
         }
-
+        private void SetUserRestrictions()
+        {
+            if (App.User.RoleId == 1)
+            {
+                btnCreate.Visibility = Visibility.Hidden;
+            }
+        }
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Pages.IntakeProductsPage());
         }
-
         private void btnOpen_Click(object sender, RoutedEventArgs e)
         {
             var intake = dgIntakes.SelectedItem as ProductIntake;
             NavigationService.Navigate(new Pages.IntakeProductsPage(intake));
+        }
+
+        private void dgIntakes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnOpen.IsEnabled = dgIntakes.SelectedItem as ProductIntake != null;
         }
     }
 }
