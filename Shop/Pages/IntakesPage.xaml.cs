@@ -28,7 +28,17 @@ namespace Shop.Pages
             Intakes = DataAccess.GetIntakes().ToList();
             SetUserRestrictions();
             this.DataContext = this;
+            DataAccess.NewItemAddedEvent += DataAccess_NewItemAddedEvent;
         }
+
+        private void DataAccess_NewItemAddedEvent()
+        {
+            Intakes = DataAccess.GetIntakes().ToList();
+            dgIntakes.ItemsSource = Intakes;
+            dgIntakes.Items.Refresh();
+            DataAccess.NewItemAddedEvent -= DataAccess_NewItemAddedEvent;
+        }
+
         private void SetUserRestrictions()
         {
             if (App.User.RoleId == 1)

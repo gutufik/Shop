@@ -35,13 +35,7 @@
                 <DataGridTextColumn Header="Поставщик" Binding="{Binding Supplier.Name}"/>
                 <DataGridTextColumn Header="Сумма" Binding="{Binding TotalAmount}"/>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Data, StringFormat=d, ConverterCulture=ru-RU}"/>
-                <DataGridTemplateColumn Header="Принята">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <CheckBox IsChecked="{Binding Accepted}" IsEnabled="False"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Статус" Binding="{Binding StatusIntake.Name}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

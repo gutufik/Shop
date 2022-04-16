@@ -80,6 +80,7 @@ namespace Shop.Pages
 
             DataAccess.SaveProduct(Product);
             DataAccess.SaveProductCountries(Product.Id, lvCountries.Items.Cast<Country>().ToList());
+            
             NavigationService.GoBack();
 
         }

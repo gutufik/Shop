@@ -76,7 +76,6 @@ namespace Shop.Pages
             if (this.gridProducts.SelectedItem != null)
             {
                 (sender as DataGrid).RowEditEnding -= gridProducts_RowEditEnding;
-                //(gridProducts.SelectedItem as IntakeProduct).ProductId = (gridProducts.SelectedItem as IntakeProduct).Product.Id;
                 (sender as DataGrid).CommitEdit();
                 (sender as DataGrid).Items.Refresh();
 

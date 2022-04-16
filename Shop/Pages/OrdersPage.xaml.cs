@@ -44,7 +44,7 @@ namespace Shop.Pages
 
         private void dgOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            btnOpen.IsEnabled = dgOrders.SelectedItem as ProductOrder != null;
+            btnOpen.IsEnabled = dgOrders.SelectedItem as Order != null;
         }
     }
 }

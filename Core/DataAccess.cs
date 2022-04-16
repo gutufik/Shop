@@ -10,17 +10,20 @@ namespace Core
 {
     public static class DataAccess
     {
+        public delegate void NewItemAddedDelegate();
+
+        public static event NewItemAddedDelegate NewItemAddedEvent;
         public static ObservableCollection<User> GetUsers()
         {
             return new ObservableCollection<User>(ShopMyasnikovEntities.GetContext().Users);
         }
         public static Client GetClient(User user)
         {
-            return ShopMyasnikovEntities.GetContext().Clients.Where(cl => cl.UserId == user.Id).FirstOrDefault();
+            return ShopMyasnikovEntities.GetContext().Clients.FirstOrDefault(cl => cl.UserId == user.Id);
         }
         public static Worker GetWorker(User user)
         {
-            return ShopMyasnikovEntities.GetContext().Workers.Where(w => w.UserId == user.Id).FirstOrDefault();
+            return ShopMyasnikovEntities.GetContext().Workers.FirstOrDefault(w => w.UserId == user.Id);
         }
         public static User GetUser(int id)
         {
@@ -76,14 +79,11 @@ namespace Core
         {
             return GetRoles().Where(role => role.Name == name).FirstOrDefault();
         }
-
-
         public static ObservableCollection<Product> GetProducts()
         {
             return new ObservableCollection<Product>(ShopMyasnikovEntities.GetContext().Products.Where(p => !p.IsDeleted));
         }
-
-        public static bool SaveProduct(Product product)
+        public static void SaveProduct(Product product)
         {
             if (GetProducts().Where(p => p.Id == product.Id).Count() == 0)
             {
@@ -93,9 +93,9 @@ namespace Core
             else
                 ShopMyasnikovEntities.GetContext().Products.SingleOrDefault(p => p.Id == product.Id);
 
-            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
+            ShopMyasnikovEntities.GetContext().SaveChanges();
+            NewItemAddedEvent?.Invoke();
         }
-
         public static bool SaveProductCountries(int productId, List<Country> countries)
         {
             foreach (var country in countries)
@@ -205,7 +205,7 @@ namespace Core
             return new ObservableCollection<Worker>(ShopMyasnikovEntities.GetContext().Workers.Where(c => !c.IsDeleted));
         }
 
-        public static bool SaveProductIntake(ProductIntake productIntake)
+        public static void SaveProductIntake(ProductIntake productIntake)
         {
             if (GetProductIntakes().Where(p => p.Id == productIntake.Id).Count() == 0)
             {
@@ -214,7 +214,8 @@ namespace Core
             else
                 ShopMyasnikovEntities.GetContext().Products.SingleOrDefault(p => p.Id == productIntake.Id);
 
-            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
+            ShopMyasnikovEntities.GetContext().SaveChanges();
+            NewItemAddedEvent?.Invoke();
         }
         
 
@@ -232,7 +233,7 @@ namespace Core
             }
             else
                 ShopMyasnikovEntities.GetContext().Products.SingleOrDefault(p => p.Id == product.Id);
-
+            NewItemAddedEvent?.Invoke();
             return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
         }
         

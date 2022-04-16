@@ -49,7 +49,7 @@ namespace Shop.Pages
 
             countPerPage = Convert.ToInt32((cbCountPerPage.SelectedItem as ComboBoxItem).Content.ToString());
             cbMonthFilter.SelectedIndex = 0;
-
+            DataAccess.NewItemAddedEvent += DataAccess_NewItemAddedEvent;
             cbUnits.SelectedIndex = Units.Count - 1;
             cbSort.SelectedIndex = 0;
             SetUserRestrictions();
@@ -64,7 +64,7 @@ namespace Shop.Pages
                 btnEdit.Visibility = Visibility.Hidden;
 
                 btnInvoices.Visibility = Visibility.Hidden;
-                btnOrders.Visibility = Visibility.Hidden;
+                //btnOrders.Visibility = Visibility.Hidden;
             }
         }
         private void ApplyFilters()
@@ -101,7 +101,13 @@ namespace Shop.Pages
                 dgProducts.ItemsSource = ProductsForSearch;
             }
         }
-
+        private void DataAccess_NewItemAddedEvent()
+        {
+            Products = DataAccess.GetProducts().ToList();
+            ApplyFilters();
+            GoPagination();
+            dgProducts.Items.Refresh();
+        }
         private void cbUnits_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ApplyFilters(); 

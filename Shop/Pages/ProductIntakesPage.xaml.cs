@@ -52,7 +52,7 @@ namespace Shop.Pages
             IntakeProducts = intake.ProductIntakeProducts.ToList();
             dpDate.SelectedDate = Intake.Data;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
-            grid.IsEnabled = !Intake.Accepted;
+            grid.IsEnabled = Intake.StatusIntakeId != 1;
 
             Suppliers = DataAccess.GetSuppliers().ToList();
             cbSupplier.SelectedIndex = 0;
@@ -101,9 +101,10 @@ namespace Shop.Pages
             Intake.StatusIntakeId = 2;
             Intake.IsDeleted = false;
             Intake.ProductIntakeProducts = IntakeProducts;
-            Intake.Accepted = true;
+            Intake.StatusIntakeId = 1;
 
             DataAccess.SaveProductIntake(Intake);
+            NavigationService.GoBack();
         }
     }
 }
