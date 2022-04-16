@@ -22,8 +22,12 @@
             <RowDefinition/>
             <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="btnCreate" Content="Создать" Click="btnCreate_Click" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
-        <Button x:Name="btnOpen" Content="Открыть" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Right" Click="btnOpen_Click" IsEnabled="False"/>
+        <StackPanel Orientation="Horizontal"  Grid.Column="1" Grid.Row="1">
+            <Button x:Name="btnCreate" Content="Создать" Click="btnCreate_Click" HorizontalAlignment="Left"/>
+            <Button x:Name="btnOpen" Content="Открыть" HorizontalAlignment="Right" Click="btnOpen_Click" IsEnabled="False"/>
+            <TextBlock Text="Поступления" HorizontalAlignment="Center"/>
+        </StackPanel>
+        
         <DataGrid x:Name="dgIntakes" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Intakes}"
                  SelectionChanged="dgIntakes_SelectionChanged" AutoGenerateColumns="False" IsReadOnly="True">
             <DataGrid.Columns>
@@ -31,6 +35,13 @@
                 <DataGridTextColumn Header="Поставщик" Binding="{Binding Supplier.Name}"/>
                 <DataGridTextColumn Header="Сумма" Binding="{Binding TotalAmount}"/>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Data, StringFormat=d, ConverterCulture=ru-RU}"/>
+                <DataGridTemplateColumn Header="Принята">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <CheckBox IsChecked="{Binding Accepted}" IsEnabled="False"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

@@ -78,6 +78,7 @@
           <Property Name="Data" Type="date" Nullable="false" />
           <Property Name="StatusIntakeId" Type="int" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Accepted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductIntakeProduct">
           <Key>
@@ -557,6 +558,7 @@
           <NavigationProperty Name="StatusIntake" Relationship="Self.FK_ProductIntake_StatusIntake" FromRole="ProductIntake" ToRole="StatusIntake" />
           <NavigationProperty Name="Supplier" Relationship="Self.FK_ProductIntake_Supplier" FromRole="ProductIntake" ToRole="Supplier" />
           <NavigationProperty Name="ProductIntakeProducts" Relationship="Self.FK_ProductIntakeProduct_ProductIntake" FromRole="ProductIntake" ToRole="ProductIntakeProduct" />
+          <Property Name="Accepted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ProductIntakeProduct">
           <Key>
@@ -1031,6 +1033,7 @@
           <EntitySetMapping Name="ProductIntakes">
             <EntityTypeMapping TypeName="ShopModel.ProductIntake">
               <MappingFragment StoreEntitySet="ProductIntake">
+                <ScalarProperty Name="Accepted" ColumnName="Accepted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="SupplierId" ColumnName="SupplierId" />
                 <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />

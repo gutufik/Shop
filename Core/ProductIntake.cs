@@ -26,6 +26,7 @@ namespace Core
         public System.DateTime Data { get; set; }
         public Nullable<int> StatusIntakeId { get; set; }
         public bool IsDeleted { get; set; }
+        public bool Accepted { get; set; }
     
         public virtual StatusIntake StatusIntake { get; set; }
         public virtual Supplier Supplier { get; set; }

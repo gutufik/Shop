@@ -30,12 +30,6 @@ namespace Shop.Pages
             Orders = DataAccess.GetOrders();
             this.DataContext = this;
         }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new OrderPage());
@@ -46,6 +40,11 @@ namespace Shop.Pages
             var order = dgOrders.SelectedItem as Order;
 
             NavigationService.Navigate(new OrderPage(order));
+        }
+
+        private void dgOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnOpen.IsEnabled = dgOrders.SelectedItem as ProductOrder != null;
         }
     }
 }

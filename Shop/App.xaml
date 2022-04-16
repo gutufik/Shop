@@ -17,13 +17,13 @@
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Margin" Value="10, 5"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Style TargetType="PasswordBox">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Margin" Value="10, 5"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Style TargetType="ListView">
@@ -40,7 +40,7 @@
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="Background" Value="#ad7261"/>
             <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Margin" Value="20, 5"/>
+            <Setter Property="Margin" Value="15, 5"/>
             <Setter Property="Padding" Value="5"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
