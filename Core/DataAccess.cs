@@ -292,5 +292,11 @@ namespace Core
 
             return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
         }
+        public static List<Order> GetUserOrders(User user)
+        {
+            var client = GetClient(user);
+            return GetOrders().Where(o=> o.ClientId == client.Id).ToList();
+        }
+ 
     }
 }

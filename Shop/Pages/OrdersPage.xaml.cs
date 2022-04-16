@@ -22,12 +22,15 @@ namespace Shop.Pages
     /// </summary>
     public partial class OrdersPage : Page
     {
-        public ObservableCollection<Order> Orders { get; set; }
+        public List<Order> Orders { get; set; }
 
         public OrdersPage()
         {
             InitializeComponent();
-            Orders = DataAccess.GetOrders();
+            if (App.User.RoleId == 3)
+                Orders = DataAccess.GetUserOrders(App.User);
+            else
+                Orders = DataAccess.GetOrders().ToList();
             this.DataContext = this;
         }
         private void btnCreate_Click(object sender, RoutedEventArgs e)
