@@ -25,7 +25,7 @@
         <Button x:Name="btnConduct" Content="Провести" Click="btnConduct_Click"/>
         <TextBlock Text="Дата" Grid.Row="1"/>
         <DatePicker x:Name="dpDate" Grid.Row="1" Grid.Column="1" FontSize="20"/>
-
+        <Button x:Name="btnPay" Content="Оплатить" Grid.Column="2" Visibility="Hidden" Click="btnPay_Click"/>
         <StackPanel Grid.Column="2" Grid.Row="1">
             <ComboBox x:Name="cbStatus" ItemsSource="{Binding StatusOrders}">
                 <ComboBox.ItemTemplate>
