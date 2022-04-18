@@ -31,7 +31,7 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <TextBox x:Name="tbSearch" TextChanged="tbSearch_TextChanged" Margin="10, 0" Width="100"/>
+            <TextBox x:Name="tbSearch" TextChanged="tbSearch_TextChanged" Width="100"/>
             <ComboBox x:Name="cbMonthFilter" SelectionChanged="cbMonthFilter_SelectionChanged">
                 <ComboBoxItem>Все</ComboBoxItem>
                 <ComboBoxItem>Текущий месяц</ComboBoxItem>

@@ -277,5 +277,9 @@ namespace Core
             };
             ShopMyasnikovEntities.GetContext().Clients.Add(client);
         }
+        public static List<StatusIntake> GetIntakeStatuses()
+        {
+            return ShopMyasnikovEntities.GetContext().StatusIntakes.ToList();
+        }
     }
 }

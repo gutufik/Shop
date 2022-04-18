@@ -49,6 +49,8 @@ namespace Shop.Pages
         {
             InitializeComponent();
             Order = order;
+            if (order.StatusOrderId > 4)
+                grid.IsEnabled = false;
             Products = DataAccess.GetProducts().ToList();
             dpDate.SelectedDate = DateTime.Now;
 

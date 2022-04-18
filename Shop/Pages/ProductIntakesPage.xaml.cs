@@ -26,12 +26,15 @@ namespace Shop.Pages
         public List<Product> Products { get; set; }
         public List<Supplier> Suppliers { get; set; }
         public List<ProductIntakeProduct> IntakeProducts { get; set; }
-
+        public List<StatusIntake> Statuses { get; set; }
 
         public ProductIntake Intake { get; set; }
         public IntakeProductsPage()
         {
             InitializeComponent();
+            Statuses = DataAccess.GetIntakeStatuses();
+            cbStatus.SelectedIndex = 1;
+            cbStatus.IsEnabled = App.User.RoleId == 1;
 
             Intake = new ProductIntake();
             Products = DataAccess.GetProducts().ToList();
@@ -47,13 +50,19 @@ namespace Shop.Pages
         public IntakeProductsPage(ProductIntake intake)
         {
             InitializeComponent();
+            Statuses = DataAccess.GetIntakeStatuses();
+            cbStatus.SelectedItem = intake.StatusIntake;
+            grid.IsEnabled = intake.StatusIntakeId != 1;
+            cbStatus.IsEnabled = App.User.RoleId == 1;
+
             Intake = intake;
             Products = DataAccess.GetProducts().ToList();
             IntakeProducts = intake.ProductIntakeProducts.ToList();
             dpDate.SelectedDate = Intake.Data;
             gridProducts.SelectionMode = DataGridSelectionMode.Extended;
             grid.IsEnabled = Intake.StatusIntakeId != 1;
-
+            if (App.User.RoleId == 1)
+                cbStatus.Visibility = Visibility.Visible;
             Suppliers = DataAccess.GetSuppliers().ToList();
             cbSupplier.SelectedIndex = 0;
             tbSum.Text = ((int)Intake.TotalAmount).ToString();
@@ -98,7 +107,7 @@ namespace Shop.Pages
             Intake.SupplierId = (cbSupplier.SelectedItem as Supplier).Id;
             Intake.TotalAmount = decimal.Parse(tbSum.Text);
             Intake.Data = (DateTime)dpDate.SelectedDate;
-            Intake.StatusIntakeId = 2;
+            Intake.StatusIntake = cbStatus.SelectedItem as StatusIntake;
             Intake.IsDeleted = false;
             Intake.ProductIntakeProducts = IntakeProducts;
             Intake.StatusIntakeId = 1;

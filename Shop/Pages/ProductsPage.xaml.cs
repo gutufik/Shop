@@ -66,6 +66,10 @@ namespace Shop.Pages
                 btnInvoices.Visibility = Visibility.Hidden;
                 //btnOrders.Visibility = Visibility.Hidden;
             }
+            else if (App.User.RoleId == 2)
+            {
+                btnOrders.Visibility = Visibility.Hidden;
+            }
         }
         private void ApplyFilters()
         {
