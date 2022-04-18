@@ -44,7 +44,11 @@ namespace Shop.Pages
             }
 
             if (DataAccess.RegistartionUser(login, passwrod))
+            {
+                var user = DataAccess.GetUser(login, passwrod);
+                DataAccess.CreateClient(user);
                 NavigationService.Navigate(new AuthorizationPage());
+            }
         }
     }
 }

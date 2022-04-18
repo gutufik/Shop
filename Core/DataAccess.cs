@@ -267,6 +267,15 @@ namespace Core
             var client = GetClient(user);
             return GetOrders().Where(o=> o.ClientId == client.Id).ToList();
         }
- 
+        public static void CreateClient(User user)
+        {
+            var client = new Client 
+            {
+                User = user,
+                AddDate = DateTime.Now,
+                UserId = user.Id
+            };
+            ShopMyasnikovEntities.GetContext().Clients.Add(client);
+        }
     }
 }
