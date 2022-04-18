@@ -36,7 +36,6 @@ namespace Shop.Pages
             Intakes = DataAccess.GetIntakes().ToList();
             dgIntakes.ItemsSource = Intakes;
             dgIntakes.Items.Refresh();
-            DataAccess.NewItemAddedEvent -= DataAccess_NewItemAddedEvent;
         }
 
         private void SetUserRestrictions()

@@ -223,47 +223,16 @@ namespace Core
         {
             return GetUser(login, password) != null;
         }
-
-        public static bool SaveProduct(Product product, List<ProductCountry> productCountries)
-        {
-            if (GetProducts().Where(p => p.Id == product.Id).Count() == 0)
-            {
-                product.AddDate = DateTime.Now;
-                ShopMyasnikovEntities.GetContext().Products.Add(product);
-            }
-            else
-                ShopMyasnikovEntities.GetContext().Products.SingleOrDefault(p => p.Id == product.Id);
-            NewItemAddedEvent?.Invoke();
-            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
-        }
-        
-        public static bool SaveProductIntakeProducts(int productIntakeId, List<ProductIntakeProduct> products)
-        {
-            foreach (var product in products)
-            {
-                product.ProductIntakeId = productIntakeId;
-
-                if (GetProductIntakeroducts().Where(p => p.ProductIntakeId == productIntakeId).Count() == 0)
-                {
-                    ShopMyasnikovEntities.GetContext().ProductIntakeProducts.Add(product);
-                }
-            }
-
-            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
-        }
         public static ObservableCollection<ProductIntakeProduct> GetProductIntakeroducts()
         {
             return new ObservableCollection<ProductIntakeProduct>(ShopMyasnikovEntities.GetContext().ProductIntakeProducts);
         }
-
-
-       
         public static ObservableCollection<ProductIntake> GetIntakes()
         {
             return new ObservableCollection<ProductIntake>(ShopMyasnikovEntities.GetContext().ProductIntakes);
         }
 
-        public static bool SaveOrder(Order order)
+        public static void SaveOrder(Order order)
         {
             if (GetOrders().Where(o => o.Id == order.Id).Count() == 0)
             {
@@ -273,7 +242,8 @@ namespace Core
             else
                 ShopMyasnikovEntities.GetContext().Orders.SingleOrDefault(p => p.Id == order.Id);
 
-            return Convert.ToBoolean(ShopMyasnikovEntities.GetContext().SaveChanges());
+            ShopMyasnikovEntities.GetContext().SaveChanges();
+            NewItemAddedEvent?.Invoke();
         }
 
         public static bool SaveProductOrder(int orderId, List<ProductOrder> productOrders)

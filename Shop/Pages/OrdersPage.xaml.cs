@@ -32,6 +32,17 @@ namespace Shop.Pages
             else
                 Orders = DataAccess.GetOrders().ToList();
             this.DataContext = this;
+            DataAccess.NewItemAddedEvent += DataAccess_NewItemAddedEvent;
+        }
+
+        private void DataAccess_NewItemAddedEvent()
+        {
+            if (App.User.RoleId == 3)
+                Orders = DataAccess.GetUserOrders(App.User);
+            else
+                Orders = DataAccess.GetOrders().ToList();
+            dgOrders.ItemsSource = Orders;
+            dgOrders.Items.Refresh();
         }
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {

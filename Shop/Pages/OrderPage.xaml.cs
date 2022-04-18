@@ -95,7 +95,7 @@ namespace Shop.Pages
             {
                 Order.ProductOrders.Add(productOrder);
             }
-            if (App.User.RoleId == 2)
+            if (App.User.RoleId == 3)
             {
                 Order.Client = DataAccess.GetClient(App.User);
             }
@@ -104,6 +104,7 @@ namespace Shop.Pages
                 Order.Worker = DataAccess.GetWorker(App.User);
             }
             DataAccess.SaveOrder(Order);
+            NavigationService.GoBack();
         }
         private void SetEnable()
         {
