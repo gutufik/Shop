@@ -18,23 +18,27 @@
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Margin" Value="10, 5"/>
+            <Setter Property="Background" Value="#FAB7A4"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Style TargetType="PasswordBox">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="Margin" Value="10, 5"/>
+            <Setter Property="Background" Value="#FAB7A4"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
         </Style>
         <Style TargetType="ListView">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Background" Value="#FAB7A4"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
         <Style TargetType="DataGrid">
             <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Background" Value="#FAB7A4"/>
         </Style>
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Arial"/>

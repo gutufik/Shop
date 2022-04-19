@@ -12,25 +12,30 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="0.5*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Авторизация" Grid.ColumnSpan="2" Grid.Row="0" FontSize="36"/>
+        <TextBlock Text="Авторизация" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="1" FontSize="36"/>
         
-        <TextBlock Text="Логин" Grid.Column="0" Grid.Row="1"/>
-        <TextBox x:Name="tbLogin" Grid.Column="1" Grid.Row="1" VerticalContentAlignment="Center"/>
+        <TextBlock Text="Логин" Grid.Column="1" Grid.Row="1"/>
+        <TextBox x:Name="tbLogin" Grid.Column="2" Grid.Row="1" VerticalContentAlignment="Center"/>
 
-        <TextBlock Text="Пароль" Grid.Column="0" Grid.Row="2"/>
-        <PasswordBox x:Name="pbPassword" Grid.Column="1" Grid.Row="2" />
+        <TextBlock Text="Пароль" Grid.Column="1" Grid.Row="2"/>
+        <PasswordBox x:Name="pbPassword" Grid.Column="2" Grid.Row="2" />
 
-        <StackPanel Grid.ColumnSpan="2" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="btnLogin" Content="Войти" Click="btnLogin_Click"/>
             <Button x:Name="btnRegistration" Content="Зарегистрироваться" Click="btnRegistration_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4">
             <CheckBox x:Name="cbRemember" Content="Запомнить данные" IsChecked="True"/>
         </StackPanel>
     </Grid>
