@@ -25,13 +25,13 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Идентификатор" Grid.Column="0" Grid.Row="0"/>
-        <TextBox x:Name="tbId" Text="{Binding Id}" Grid.Column="1" IsReadOnly="True" Width="200"/>
+        <TextBox x:Name="tbId" Text="{Binding Product.Id}" Grid.Column="1" IsReadOnly="True" Width="200"/>
 
         <TextBlock Text="Наименование" Grid.Row="1"/>
-        <TextBox x:Name="tbName" Text="{Binding Name}" Grid.Row="1" Grid.Column="1" Width="200"/>
+        <TextBox x:Name="tbName" Text="{Binding Product.Name}" Grid.Row="1" Grid.Column="1" Width="200"/>
 
         <TextBlock Text="Комментарий" Grid.Row="2"/>
-        <TextBox x:Name="tbDescription" Text="{Binding Description}" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1"
+        <TextBox x:Name="tbDescription" Text="{Binding Product.Description}" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1"
                  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Width="200" Margin="10"/>
 
         <TextBlock Text="Eдиница измерения" Grid.Row="3"/>
@@ -43,18 +43,18 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <TextBlock Text="Цена" Grid.Row="4"/>
-        <TextBox x:Name="tbPrice" Text="{Binding Price}" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" 
+        <TextBox x:Name="tbPrice" Text="{Binding Product.Price}" TextWrapping="Wrap" Grid.Row="4" Grid.Column="1" 
                  Width="200" Margin="10"/>
 
         <StackPanel Orientation="Vertical" Grid.RowSpan="3" Grid.Column="2" VerticalAlignment="Center" Margin="5">
             <TextBlock Text="Изображение" Margin="0,20"/>
-            <Image x:Name="imageProduct" Source="{Binding Photo}" Height="140"/>
+            <Image x:Name="imageProduct" Source="{Binding Product.Photo}" Height="140"/>
             <Button x:Name="btnChoicePhoto" Content="Выбрать фото" Click="btnChoicePhoto_Click"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Grid.RowSpan="5" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" Margin="5">
             <TextBlock Text="Страны" Margin="0, 10"/>
-            <ListView x:Name="lvCountries" ItemsSource="{Binding ProductCountries}" Height="100" SelectionChanged="lvCountries_SelectionChanged">
+            <ListView x:Name="lvCountries" ItemsSource="{Binding Product.ProductCountries}" Height="100" SelectionChanged="lvCountries_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Name}" Background="{Binding Color}"/>

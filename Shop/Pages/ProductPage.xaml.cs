@@ -41,7 +41,7 @@ namespace Shop.Pages
             cbUnits.SelectedItem = product.Unit;
 
 
-            this.DataContext = Product;
+            this.DataContext = this;
         }
         public ProductPage()
         {
@@ -56,7 +56,7 @@ namespace Shop.Pages
             cbUnits.SelectedIndex = 0;
 
 
-            this.DataContext = Product;
+            this.DataContext = this;
         }
         private void FillCountries()
         {
